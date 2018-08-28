@@ -1,0 +1,289 @@
+fileFormatVersion: 2
+guid: e4f0477e64585d34097b6d538ec78f23
+timeCreated: 1535456301
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Ankle.L
+    100002: Ankle.R
+    100004: Arm.L
+    100006: Arm.R
+    100008: Base
+    100010: Base_end
+    100012: Clavicle.L
+    100014: Clavicle.R
+    100016: Finger1.1.L
+    100018: Finger1.1.R
+    100020: Finger1.2.L
+    100022: Finger1.2.L_end
+    100024: Finger1.2.R
+    100026: Finger1.2.R_end
+    100028: Finger2.1.L
+    100030: Finger2.1.R
+    100032: Finger2.2.L
+    100034: Finger2.2.L_end
+    100036: Finger2.2.R
+    100038: Finger2.2.R_end
+    100040: Finger3.1.L
+    100042: Finger3.1.R
+    100044: Finger3.2.L
+    100046: Finger3.2.L_end
+    100048: Finger3.2.R
+    100050: Finger3.2.R_end
+    100052: Foot.L
+    100054: Foot.L_end
+    100056: Foot.R
+    100058: Foot.R_end
+    100060: Forearm.L
+    100062: Forearm.R
+    100064: Hand.L
+    100066: Hand.R
+    100068: Head
+    100070: Head_end
+    100072: Hips
+    100074: //RootNode
+    100076: Kid_Armature
+    100078: Kid_Mesh
+    100080: LegLower.L
+    100082: LegLower.R
+    100084: LegUpper.L
+    100086: LegUpper.R
+    100088: Neck
+    100090: Spine01
+    100092: Spine02
+    100094: Thumb1.L
+    100096: Thumb1.R
+    100098: Thumb2.L
+    100100: Thumb2.L_end
+    100102: Thumb2.R
+    100104: Thumb2.R_end
+    100106: ArmPole.L
+    100108: ArmPole.L_end
+    100110: ArmPole.R
+    100112: ArmPole.R_end
+    100114: FootTarget.L
+    100116: FootTarget.L_end
+    100118: FootTarget.R
+    100120: FootTarget.R_end
+    100122: HandTarget.L
+    100124: HandTarget.L_end
+    100126: HandTarget.R
+    100128: HandTarget.R_end
+    100130: LegPole.L
+    100132: LegPole.L_end
+    100134: LegPole.R
+    100136: LegPole.R_end
+    400000: Ankle.L
+    400002: Ankle.R
+    400004: Arm.L
+    400006: Arm.R
+    400008: Base
+    400010: Base_end
+    400012: Clavicle.L
+    400014: Clavicle.R
+    400016: Finger1.1.L
+    400018: Finger1.1.R
+    400020: Finger1.2.L
+    400022: Finger1.2.L_end
+    400024: Finger1.2.R
+    400026: Finger1.2.R_end
+    400028: Finger2.1.L
+    400030: Finger2.1.R
+    400032: Finger2.2.L
+    400034: Finger2.2.L_end
+    400036: Finger2.2.R
+    400038: Finger2.2.R_end
+    400040: Finger3.1.L
+    400042: Finger3.1.R
+    400044: Finger3.2.L
+    400046: Finger3.2.L_end
+    400048: Finger3.2.R
+    400050: Finger3.2.R_end
+    400052: Foot.L
+    400054: Foot.L_end
+    400056: Foot.R
+    400058: Foot.R_end
+    400060: Forearm.L
+    400062: Forearm.R
+    400064: Hand.L
+    400066: Hand.R
+    400068: Head
+    400070: Head_end
+    400072: Hips
+    400074: //RootNode
+    400076: Kid_Armature
+    400078: Kid_Mesh
+    400080: LegLower.L
+    400082: LegLower.R
+    400084: LegUpper.L
+    400086: LegUpper.R
+    400088: Neck
+    400090: Spine01
+    400092: Spine02
+    400094: Thumb1.L
+    400096: Thumb1.R
+    400098: Thumb2.L
+    400100: Thumb2.L_end
+    400102: Thumb2.R
+    400104: Thumb2.R_end
+    400106: ArmPole.L
+    400108: ArmPole.L_end
+    400110: ArmPole.R
+    400112: ArmPole.R_end
+    400114: FootTarget.L
+    400116: FootTarget.L_end
+    400118: FootTarget.R
+    400120: FootTarget.R_end
+    400122: HandTarget.L
+    400124: HandTarget.L_end
+    400126: HandTarget.R
+    400128: HandTarget.R_end
+    400130: LegPole.L
+    400132: LegPole.L_end
+    400134: LegPole.R
+    400136: LegPole.R_end
+    2100000: Material
+    2100002: SeeTrhougt
+    2100004: Black
+    4300000: Kid_Mesh
+    7400000: Running
+    7400002: Kid_Armature|Kid_MeshAction
+    9500000: //RootNode
+    13700000: Kid_Mesh
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Running
+      takeName: Kid_Armature|Kid_ArmatureAction
+      firstFrame: 5
+      lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Kid_Armature|Kid_MeshAction
+      takeName: Kid_Armature|Kid_MeshAction
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
