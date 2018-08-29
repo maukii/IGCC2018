@@ -21,7 +21,7 @@ public class IoTDoor : IoTBaseObj
         // Edit cooldownDuration and hackCooldown here
         // Default cooldown duration is 1.0f.
 
-        defaultRotY = gameObject.GetComponent<Transform>().rotation.eulerAngles.y;
+        defaultRotY = transform.rotation.eulerAngles.y;
 
     }
 
@@ -89,12 +89,12 @@ public class IoTDoor : IoTBaseObj
 
     void RotateDoor()
     {
-        gameObject.GetComponent<Transform>().Rotate(Vector3.up * rotateDir * Time.deltaTime);
+        transform.Rotate(Vector3.up * rotateDir * Time.deltaTime);
 
-        if (gameObject.GetComponent<Transform>().rotation.eulerAngles.y >= (defaultRotY + 90.0f) || gameObject.GetComponent<Transform>().rotation.eulerAngles.y <= defaultRotY)
+        if (transform.rotation.eulerAngles.y >= (defaultRotY + 90.0f) || gameObject.GetComponent<Transform>().rotation.eulerAngles.y <= defaultRotY)
         {
             // NOTE: PRINT
-            print(gameObject.GetComponent<Transform>().rotation.eulerAngles.y);
+            print(transform.rotation.eulerAngles.y);
             isRot = false;
         }
     }

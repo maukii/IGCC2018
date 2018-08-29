@@ -1,0 +1,241 @@
+fileFormatVersion: 2
+guid: 4a533f81a5cd7ee40a548531e6effc20
+timeCreated: 1535538975
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Body
+    100002: //RootNode
+    100004: Hat1
+    100006: Hat2
+    100008: Hat3
+    100010: Head
+    100012: Headtip
+    100014: L_Elbow
+    100016: L_Hand
+    100018: L_Handtip
+    100020: L_Shoulder
+    100022: pCylinder1
+    100024: pCylinder3
+    100026: polySurface1
+    100028: polySurface2
+    100030: polySurface3
+    100032: polySurface4
+    100034: pSphere1
+    100036: R_Elbow
+    100038: R_Hand
+    100040: R_Handtip
+    100042: R_Shoulder
+    100044: Rig
+    100046: Root
+    100048: Tail1
+    100050: Tail2
+    100052: Tail3
+    100054: Teeth_Lower
+    100056: Teeth_Upper
+    100058: transform2
+    100060: transform3
+    100062: transform4
+    100064: transform5
+    400000: Body
+    400002: //RootNode
+    400004: Hat1
+    400006: Hat2
+    400008: Hat3
+    400010: Head
+    400012: Headtip
+    400014: L_Elbow
+    400016: L_Hand
+    400018: L_Handtip
+    400020: L_Shoulder
+    400022: pCylinder1
+    400024: pCylinder3
+    400026: polySurface1
+    400028: polySurface2
+    400030: polySurface3
+    400032: polySurface4
+    400034: pSphere1
+    400036: R_Elbow
+    400038: R_Hand
+    400040: R_Handtip
+    400042: R_Shoulder
+    400044: Rig
+    400046: Root
+    400048: Tail1
+    400050: Tail2
+    400052: Tail3
+    400054: Teeth_Lower
+    400056: Teeth_Upper
+    400058: transform2
+    400060: transform3
+    400062: transform4
+    400064: transform5
+    4300000: pCylinder3
+    7400000: Ghost | Idle
+    9500000: //RootNode
+    13700000: pCylinder3
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Ghost | Idle
+      takeName: Take 001
+      firstFrame: 11
+      lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 11
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: pCylinder1
+        weight: 1
+      - path: pCylinder1/transform5
+        weight: 1
+      - path: pCylinder3
+        weight: 1
+      - path: pSphere1
+        weight: 1
+      - path: pSphere1/polySurface1
+        weight: 1
+      - path: pSphere1/polySurface1/polySurface3
+        weight: 1
+      - path: pSphere1/polySurface1/polySurface3/transform4
+        weight: 1
+      - path: pSphere1/polySurface1/polySurface4
+        weight: 1
+      - path: pSphere1/polySurface1/polySurface4/transform2
+        weight: 1
+      - path: pSphere1/polySurface2
+        weight: 1
+      - path: pSphere1/polySurface2/transform3
+        weight: 1
+      - path: Rig
+        weight: 1
+      - path: Rig/Root
+        weight: 1
+      - path: Rig/Root/Body
+        weight: 1
+      - path: Rig/Root/Body/Head
+        weight: 1
+      - path: Rig/Root/Body/Head/Headtip
+        weight: 1
+      - path: Rig/Root/Body/Head/Headtip/Hat1
+        weight: 1
+      - path: Rig/Root/Body/Head/Headtip/Hat1/Hat2
+        weight: 1
+      - path: Rig/Root/Body/Head/Headtip/Hat1/Hat2/Hat3
+        weight: 1
+      - path: Rig/Root/Body/Head/Teeth_Lower
+        weight: 1
+      - path: Rig/Root/Body/Head/Teeth_Upper
+        weight: 1
+      - path: Rig/Root/Body/L_Shoulder
+        weight: 1
+      - path: Rig/Root/Body/L_Shoulder/L_Elbow
+        weight: 1
+      - path: Rig/Root/Body/L_Shoulder/L_Elbow/L_Hand
+        weight: 1
+      - path: Rig/Root/Body/L_Shoulder/L_Elbow/L_Hand/L_Handtip
+        weight: 1
+      - path: Rig/Root/Body/R_Shoulder
+        weight: 1
+      - path: Rig/Root/Body/R_Shoulder/R_Elbow
+        weight: 1
+      - path: Rig/Root/Body/R_Shoulder/R_Elbow/R_Hand
+        weight: 1
+      - path: Rig/Root/Body/R_Shoulder/R_Elbow/R_Hand/R_Handtip
+        weight: 1
+      - path: Rig/Root/Body/Tail1
+        weight: 1
+      - path: Rig/Root/Body/Tail1/Tail2
+        weight: 1
+      - path: Rig/Root/Body/Tail1/Tail2/Tail3
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
