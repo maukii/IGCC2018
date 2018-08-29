@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7528432a65c010f4ea5f088de6f876c9, type: 3}
   m_Name: Door
   m_EditorClassIdentifier: 
-  hacked: 0
+  hacked: 1
