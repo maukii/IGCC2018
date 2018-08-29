@@ -14,11 +14,10 @@ public class PlayerMovementGyro : MonoBehaviour
     Gyroscope gyro;
 
     [Header("-- Variables --")]
-    [SerializeField]
-    Quaternion deviceRotation; // debug
-    [SerializeField] Vector3 tilt;              // debug
+    [SerializeField] bool hacking; // debug
     [SerializeField] float speed = 10f;
-    [SerializeField] bool hacking;
+    Quaternion deviceRotation; // debug
+    Vector3 tilt;              // debug
 
     void Start()
     {
@@ -34,6 +33,7 @@ public class PlayerMovementGyro : MonoBehaviour
     void Update()
     {
         hacking = player.hacking;
+        player.playerPosition = transform.position;
 
         if (DEBUG_keyboard) // debug
         {

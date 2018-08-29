@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class PlayerData : ScriptableObject
+public class Hackable : ScriptableObject
 {
-    public bool hacking;
-    public Vector3 playerPosition;
+
+    public bool hacked;
+    
 }
