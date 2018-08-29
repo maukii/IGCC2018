@@ -5,18 +5,33 @@ using UnityEngine;
 public class IoTDoor : IoTBaseObj
 {
     /// Open door = activated
+    
+    // Direction to rotate door and strength of rotation (neg/pos)
+    float rotateDir = 0.0f;
+
+    // Is door being opened/closed right now?
+    bool isRot = false;
+
+    // Closed door position
+    float defaultRotY = 0.0f;
 
     // Use this for initialization
     void Start ()
     {
         // Edit cooldownDuration and hackCooldown here
         // Default cooldown duration is 1.0f.
-	}
+
+        defaultRotY = gameObject.GetComponent<Transform>().rotation.eulerAngles.y;
+
+    }
 
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
+
+        if (isRot)
+            RotateDoor();
 
         // Check if there is a activation duration
         if (activationDuration > 0.0f)
@@ -29,8 +44,14 @@ public class IoTDoor : IoTBaseObj
                 else
                 {
                     isActivated = false;
+                    hackCooldown = hackCooldownDuration;
 
-                    gameObject.GetComponent<Transform>().Translate(new Vector3(-1.0f, 0.0f, 0.0f));
+                    // (Sliding Door)
+                    //gameObject.GetComponent<Transform>().Translate(new Vector3(-1.0f, 0.0f, 0.0f));
+
+                    // (Rotating Door)
+                    isRot = true;
+                    rotateDir = -90;
                 }
             }
         }
@@ -49,12 +70,32 @@ public class IoTDoor : IoTBaseObj
         activationTick = activationDuration;
         isActivated = !isActivated;
 
-        // Open/Close door
+        //// Open/Close door(Sliding Door)
+        //if (isActivated)
+        //    gameObject.GetComponent<Transform>().Translate(new Vector3(1.0f, 0.0f, 0.0f));
+        //else
+        //    gameObject.GetComponent<Transform>().Translate(new Vector3(-1.0f, 0.0f, 0.0f));
+
+        // (Rotating Door)
+        isRot = true;
+
         if (isActivated)
-            gameObject.GetComponent<Transform>().Translate(new Vector3(1.0f, 0.0f, 0.0f));
+            rotateDir = 90;
         else
-            gameObject.GetComponent<Transform>().Translate(new Vector3(-1.0f, 0.0f, 0.0f));
+            rotateDir = -90;
 
         return true;
+    }
+
+    void RotateDoor()
+    {
+        gameObject.GetComponent<Transform>().Rotate(Vector3.up * rotateDir * Time.deltaTime);
+
+        if (gameObject.GetComponent<Transform>().rotation.eulerAngles.y >= (defaultRotY + 90.0f) || gameObject.GetComponent<Transform>().rotation.eulerAngles.y <= defaultRotY)
+        {
+            // NOTE: PRINT
+            print(gameObject.GetComponent<Transform>().rotation.eulerAngles.y);
+            isRot = false;
+        }
     }
 }

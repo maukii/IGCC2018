@@ -1,0 +1,210 @@
+fileFormatVersion: 2
+guid: 89d790566635aa54096a3f08c68772a7
+timeCreated: 1535531731
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Door1
+    100002: Electric_Kettle1
+    100004: Fridge1
+    100006: Kitchen_table
+    100008: pCube11
+    100010: pCube15
+    100012: pCube17
+    100014: pCube18
+    100016: pCube19
+    100018: pCube20
+    100020: pCube21
+    100022: pCube22
+    100024: pCube26
+    100026: pCube27
+    100028: pCube31
+    100030: pCylinder2
+    100032: polySurface10
+    100034: polySurface11
+    100036: polySurface11 1
+    100038: polySurface12
+    100040: polySurface13
+    100042: polySurface14
+    100044: polySurface14 1
+    100046: polySurface15
+    100048: polySurface8
+    100050: polySurface9
+    100052: Sink1
+    100054: //RootNode
+    100056: transform15
+    100058: transform16
+    100060: transform19
+    100062: transform20
+    100064: transform23
+    100066: transform24
+    100068: transform25
+    100070: transform26
+    100072: transform27
+    100074: transform28
+    100076: transform29
+    100078: transform30
+    100080: transform31
+    100082: transform32
+    100084: transform33
+    100086: Wall
+    100088: Wall_door
+    400000: Door1
+    400002: Electric_Kettle1
+    400004: Fridge1
+    400006: Kitchen_table
+    400008: pCube11
+    400010: pCube15
+    400012: pCube17
+    400014: pCube18
+    400016: pCube19
+    400018: pCube20
+    400020: pCube21
+    400022: pCube22
+    400024: pCube26
+    400026: pCube27
+    400028: pCube31
+    400030: pCylinder2
+    400032: polySurface10
+    400034: polySurface11
+    400036: polySurface11 1
+    400038: polySurface12
+    400040: polySurface13
+    400042: polySurface14
+    400044: polySurface14 1
+    400046: polySurface15
+    400048: polySurface8
+    400050: polySurface9
+    400052: Sink1
+    400054: //RootNode
+    400056: transform15
+    400058: transform16
+    400060: transform19
+    400062: transform20
+    400064: transform23
+    400066: transform24
+    400068: transform25
+    400070: transform26
+    400072: transform27
+    400074: transform28
+    400076: transform29
+    400078: transform30
+    400080: transform31
+    400082: transform32
+    400084: transform33
+    400086: Wall
+    400088: Wall_door
+    2300000: Door1
+    2300002: Electric_Kettle1
+    2300004: Kitchen_table
+    2300006: pCube11
+    2300008: pCube15
+    2300010: pCube17
+    2300012: pCube18
+    2300014: pCube19
+    2300016: pCube20
+    2300018: polySurface11
+    2300020: polySurface14
+    2300022: Sink1
+    2300024: Wall
+    2300026: Wall_door
+    3300000: Door1
+    3300002: Electric_Kettle1
+    3300004: Kitchen_table
+    3300006: pCube11
+    3300008: pCube15
+    3300010: pCube17
+    3300012: pCube18
+    3300014: pCube19
+    3300016: pCube20
+    3300018: polySurface11
+    3300020: polySurface14
+    3300022: Sink1
+    3300024: Wall
+    3300026: Wall_door
+    4300000: pCube11
+    4300002: Wall
+    4300004: pCube15
+    4300006: pCube17
+    4300008: pCube18
+    4300010: pCube19
+    4300012: pCube20
+    4300014: Door1
+    4300016: Wall_door
+    4300018: Kitchen_table
+    4300020: Sink1
+    4300022: Electric_Kettle1
+    4300024: polySurface14
+    4300026: polySurface11
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
