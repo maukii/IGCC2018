@@ -22,8 +22,6 @@ public class IoTBaseObj : MonoBehaviour
     // If activation has duration, reduce this one;
     protected float activationTick = 0.0f;
 
-
-
 	// Use this for initialization
 	void Start()
     {
