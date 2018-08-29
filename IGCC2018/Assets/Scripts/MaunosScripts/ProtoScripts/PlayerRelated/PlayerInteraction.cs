@@ -2,17 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInteraction : MonoBehaviour
 {
     public PlayerData player;
 
     public KeyCode action;
-    public KeyCode changeTarget;
+    public KeyCode changeTargetUp, changeTargetDown;
+
+    [SerializeField] int targetIndex;
 
     public List<GameObject> nearObjects = new List<GameObject>();
     [SerializeField] GameObject targetedObject = null;
-    float nearRange;
 
     public GameObject GetTargetedObject()
     {
@@ -29,42 +31,43 @@ public class PlayerInteraction : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(action) && !player.hacking)
+
+        if (Input.GetKeyDown(changeTargetUp) && !player.hacking)
         {
-            if (targetedObject != null)
+            ChangeTargetUp();
+        }
+
+        if(Input.GetKeyDown(changeTargetDown) && !player.hacking)
+        {
+            ChangeTargetDown();
+        }
+
+    }
+
+    public void Action()
+    {
+        if (targetedObject != null)
+        {
+            if (targetedObject.GetComponent<Hack>() != null)
             {
-                if(targetedObject.GetComponent<Hack>() != null)
-                {
-                    Debug.Log("Hacked " + targetedObject.name);
-                    player.hacking = true;
-                    targetedObject.GetComponent<Hack>().HackObject();
-                    nearObjects.Remove(targetedObject);
+                Debug.Log("Hacked " + targetedObject.name);
+                player.hacking = true;
+                targetedObject.GetComponent<Hack>().HackObject();
+                nearObjects.Remove(targetedObject);
 
-                    CheckNearest();
-                }
-                else if(targetedObject.GetComponent<Loot>() != null)
-                {
-                    Debug.Log("Looted " + targetedObject.name);
-                    targetedObject.gameObject.SetActive(false);
-                    // give player points
+                CheckNearest();
+            }
+            else if (targetedObject.GetComponent<Loot>() != null)
+            {
+                Debug.Log("Looted " + targetedObject.name);
+                targetedObject.gameObject.SetActive(false);
+                // give player points
 
-                    nearObjects.Remove(targetedObject);
-                    CheckNearest();
-                }
+                nearObjects.Remove(targetedObject);
+                CheckNearest();
             }
         }
-
-        if (Input.GetKeyUp(action))
-        {
-            player.hacking = false;
-            Debug.Log("Not hacking");
-        }
-
-        if (Input.GetKeyDown(changeTarget) && !player.hacking)
-        {
-            ChangeTarget();
-        }
-
+        player.hacking = false;
     }
 
     private void CheckNearest()
@@ -89,21 +92,36 @@ public class PlayerInteraction : MonoBehaviour
         {
             targetedObject = null;
         }
+
     }
 
-    private void ChangeTarget()
+    public void ChangeTargetUp()
     {
-        if (nearObjects.Count >= 1)
+        if (nearObjects.Count > 0)
         {
-            for (int i = 0; i < nearObjects.Count; i++)
+            targetIndex++;
+            if (targetIndex >= nearObjects.Count)
             {
-                if(targetedObject != nearObjects[i])
-                {
-                    targetedObject = nearObjects[i];
-                    break;
-                }
+                targetIndex = 0;
+                targetedObject = nearObjects[targetIndex];
             }
-            Debug.Log("Changed targer");
+
+            targetedObject = nearObjects[targetIndex];
+        }
+    }
+
+    public void ChangeTargetDown()
+    {
+        if (nearObjects.Count > 0)
+        {
+            targetIndex--;
+            if (targetIndex < 0)
+            {
+                targetIndex = nearObjects.Count - 1;
+                targetedObject = nearObjects[targetIndex];
+            }
+
+            targetedObject = nearObjects[targetIndex];
         }
     }
 

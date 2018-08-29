@@ -7,6 +7,7 @@ public class PlayerMovementGyro : MonoBehaviour
 {
 
     public PlayerData player;
+    public GameObject playerModel;
 
     [Header("Use if no device connected")]
     public bool DEBUG_keyboard;
@@ -14,10 +15,9 @@ public class PlayerMovementGyro : MonoBehaviour
     Gyroscope gyro;
 
     [Header("-- Variables --")]
-    [SerializeField] bool hacking; // debug
-    [SerializeField] float speed = 10f;
-    Quaternion deviceRotation; // debug
-    Vector3 tilt;              // debug
+    [SerializeField] bool hacking = false, isFlat = true; 
+    [SerializeField] float speed = 10f, rotSpeed;
+    Quaternion deviceRotation;
 
     void Start()
     {
@@ -25,8 +25,10 @@ public class PlayerMovementGyro : MonoBehaviour
         DEBUG_keyboard = SystemInfo.supportsGyroscope ? false : true;
 
         if (SystemInfo.supportsGyroscope)
+        {
             Input.gyro.enabled = true;
-
+            Screen.orientation = ScreenOrientation.LandscapeLeft;
+        }
         Debug.Log(SystemInfo.supportsGyroscope ? "Supports gyroscope" : "No gyroscope support");
     }
 
@@ -35,9 +37,9 @@ public class PlayerMovementGyro : MonoBehaviour
         hacking = player.hacking;
         player.playerPosition = transform.position;
 
-        if (DEBUG_keyboard) // debug
+        if (DEBUG_keyboard)
         {
-            float hor = Input.GetAxis("Horizontal"); // debugging feature: movement with keyboard
+            float hor = Input.GetAxis("Horizontal");
             float ver = Input.GetAxis("Vertical");
             Vector3 direction = new Vector3(hor, 0, ver);
 
@@ -46,14 +48,26 @@ public class PlayerMovementGyro : MonoBehaviour
         else
         {
             deviceRotation = DeviceRotation.Get();
-            transform.rotation = deviceRotation;
-        }
+            Vector3 direction = new Vector3(Input.acceleration.x, -Input.acceleration.y, 0);
 
+            if (isFlat)
+                direction = Quaternion.Euler(-90, 0, 0) * direction;
+
+            // MOVEMENT
+            transform.Translate(direction * speed * Time.deltaTime, Space.World);
+
+            // ROTATION
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, targetRotation, rotSpeed * Time.deltaTime);
+
+            Debug.DrawRay(transform.position + Vector3.up, direction, Color.green);
+        }
+        //playerModel.transform.rotation = Quaternion.LookRotation(direction);
     }
 
     void OnGUI()
     {
-        GUI.Label(new Rect(500, 300, 200, 40), "Gyro rotation rate " + gyro.rotationRate); // debug gyro status on screen
+        GUI.Label(new Rect(500, 300, 200, 40), "Gyro rotation rate " + gyro.rotationRate);
         GUI.Label(new Rect(500, 350, 200, 40), "Gyro attitude" + gyro.attitude);
         GUI.Label(new Rect(500, 400, 200, 40), "Gyro enabled : " + gyro.enabled);
     }
