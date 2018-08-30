@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class PlayerMovementGyro : MonoBehaviour
 {
-
     public PlayerData player;
-    public GameObject playerModel;
 
     [Header("Use if no device connected")]
     public bool DEBUG_keyboard;
@@ -16,8 +14,9 @@ public class PlayerMovementGyro : MonoBehaviour
 
     [Header("-- Variables --")]
     [SerializeField] bool hacking = false, isFlat = true; 
-    [SerializeField] float speed = 10f, rotSpeed;
-    Quaternion deviceRotation;
+    [SerializeField] float speed = 1f, wantedPhoneScreenAngle = 45f;
+    [HideInInspector] public Vector3 tilt;
+
 
     void Start()
     {
@@ -34,6 +33,7 @@ public class PlayerMovementGyro : MonoBehaviour
 
     void Update()
     {
+
         hacking = player.hacking;
         player.playerPosition = transform.position;
 
@@ -44,25 +44,33 @@ public class PlayerMovementGyro : MonoBehaviour
             Vector3 direction = new Vector3(hor, 0, ver);
 
             transform.Translate(direction * speed * Time.deltaTime);
-        }
+        } // DEBUG -- keyboardinput
         else
         {
-            deviceRotation = DeviceRotation.Get();
-            Vector3 direction = new Vector3(Input.acceleration.x, -Input.acceleration.y, 0);
+            tilt = Input.acceleration;
 
             if (isFlat)
-                direction = Quaternion.Euler(-90, 0, 0) * direction;
+                tilt = Quaternion.Euler(wantedPhoneScreenAngle, 0, 0) * tilt;
 
-            // MOVEMENT
-            transform.Translate(direction * speed * Time.deltaTime, Space.World);
-
-            // ROTATION
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, targetRotation, rotSpeed * Time.deltaTime);
-
-            Debug.DrawRay(transform.position + Vector3.up, direction, Color.green);
+            if(tilt.y > .1f)
+            {
+                transform.Translate(Vector3.forward * speed * Time.deltaTime * tilt.y); // works need to polish
+            }
+            else if(tilt.y < -0.2f)
+            {
+                transform.Translate(Vector3.back * speed * Time.deltaTime * -tilt.y * 0.5f); // backing up half as fast
+            }
         }
-        //playerModel.transform.rotation = Quaternion.LookRotation(direction);
+
+        // DEBUG
+        Debug.DrawRay(transform.position + Vector3.up, tilt, Color.green);
+        Debug.Log(tilt.y);
+
+    }
+
+    public Vector3 GetTilt()
+    {
+        return tilt;
     }
 
     void OnGUI()

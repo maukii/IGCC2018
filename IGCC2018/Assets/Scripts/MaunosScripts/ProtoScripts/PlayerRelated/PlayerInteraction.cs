@@ -44,7 +44,7 @@ public class PlayerInteraction : MonoBehaviour
 
     }
 
-    public void Action()
+    public void Action() 
     {
         if (targetedObject != null)
         {
