@@ -15,6 +15,9 @@ public class IoTDoor : IoTBaseObj
     // Closed door position
     float defaultRotY = 0.0f;
 
+    // Flip door opening side
+    public bool flipDirection = false;
+
     // Use this for initialization
     void Start ()
     {
@@ -89,13 +92,22 @@ public class IoTDoor : IoTBaseObj
 
     void RotateDoor()
     {
-        transform.Rotate(Vector3.up * rotateDir * Time.deltaTime);
-
-        if (transform.rotation.eulerAngles.y >= (defaultRotY + 90.0f) || gameObject.GetComponent<Transform>().rotation.eulerAngles.y <= defaultRotY)
+        if (flipDirection)
         {
-            // NOTE: PRINT
-            print(transform.rotation.eulerAngles.y);
-            isRot = false;
+            transform.Rotate(Vector3.up * -rotateDir * Time.deltaTime);
+
+            /// oh god this took me longer than I expected it to take
+            isRot = (rotateDir > 0) ?
+                !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, (defaultRotY - 90.0f))) <= 1.0f) :
+                !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, defaultRotY)) <= 1.0f);
+        }
+        else
+        {
+            transform.Rotate(Vector3.up * rotateDir * Time.deltaTime);
+
+            isRot = (rotateDir > 0) ?
+                !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, (defaultRotY + 90.0f))) <= 1.0f) :
+                !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, defaultRotY)) <= 1.0f);
         }
     }
 }

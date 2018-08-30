@@ -7,6 +7,7 @@ public class IoTLight : IoTBaseObj
 	// Use this for initialization
 	void Start ()
     {
+        gameObject.GetComponent<Light>().intensity = 0.0f;
     }
 
     // Update is called once per frame
