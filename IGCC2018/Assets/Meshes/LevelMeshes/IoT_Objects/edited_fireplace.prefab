@@ -11,6 +11,23 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1626529912431010}
   m_IsPrefabParent: 1
+--- !u!1 &1471493036692044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4555479096039986}
+  - component: {fileID: 108736547529138068}
+  - component: {fileID: 114327373878638456}
+  m_Layer: 0
+  m_Name: Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1626529912431010
 GameObject:
   m_ObjectHideFlags: 0
@@ -21,27 +38,10 @@ GameObject:
   - component: {fileID: 4261965978339736}
   - component: {fileID: 33781245991759288}
   - component: {fileID: 23422209980580848}
-  - component: {fileID: 65679615410363126}
+  - component: {fileID: 65464985016720924}
   m_Layer: 0
   m_Name: edited_fireplace
   m_TagString: IoT
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1885469841853588
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4528645267700226}
-  - component: {fileID: 108994443280339242}
-  - component: {fileID: 114534570842104842}
-  m_Layer: 0
-  m_Name: Light
-  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,21 +53,21 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1626529912431010}
   m_LocalRotation: {x: 0, y: -0.7132504, z: 0, w: 0.7009094}
-  m_LocalPosition: {x: 27.78, y: 0, z: -18.25}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 27.58, y: 0, z: -18.25}
+  m_LocalScale: {x: 100, y: 100, z: 120}
   m_Children:
-  - {fileID: 4528645267700226}
+  - {fileID: 4555479096039986}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -91, z: 0}
---- !u!4 &4528645267700226
+--- !u!4 &4555479096039986
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1885469841853588}
+  m_GameObject: {fileID: 1471493036692044}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.926, z: 0.12}
+  m_LocalPosition: {x: 0.00017, y: 0.01337, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4261965978339736}
@@ -112,7 +112,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1626529912431010}
   m_Mesh: {fileID: 4300000, guid: e141b1362811bcb40be67109ccbd165f, type: 3}
---- !u!65 &65679615410363126
+--- !u!65 &65464985016720924
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -122,14 +122,14 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.000001, y: 1.998395, z: 2.008219}
-  m_Center: {x: -5.2505474e-12, y: 0.9991975, z: -0.0041090255}
---- !u!108 &108994443280339242
+  m_Size: {x: 0.020000009, y: 0.054200843, z: 0.009988985}
+  m_Center: {x: -9.323486e-12, y: 0.027100421, z: -0.005005509}
+--- !u!108 &108736547529138068
 Light:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1885469841853588}
+  m_GameObject: {fileID: 1471493036692044}
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
@@ -160,12 +160,12 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114534570842104842
+--- !u!114 &114327373878638456
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1885469841853588}
+  m_GameObject: {fileID: 1471493036692044}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aef21c6499d27dd40b6163f74fff9f33, type: 3}
@@ -173,4 +173,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActivated: 0
   hackCooldownDuration: 1
-  activationDuration: 20
+  activationDuration: 0
