@@ -1,23 +1,17 @@
 fileFormatVersion: 2
-guid: e141b1362811bcb40be67109ccbd165f
-timeCreated: 1535536549
+guid: 88b5fcf7470ff744385fe0d8dbe70e24
+timeCreated: 1535621757
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Firewoods
     400000: //RootNode
-    400002: Firewoods
-    2100000: Material
     2300000: //RootNode
-    2300002: Firewoods
     3300000: //RootNode
-    3300002: Firewoods
-    4300000: FirePlace
-    4300002: Firewoods
+    4300000: Chair
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
   animations:
