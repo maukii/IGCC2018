@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class PlayerMovementGyro : MonoBehaviour
 {
-
     public PlayerData player;
-    public GameObject playerModel;
 
     [Header("Use if no device connected")]
     public bool DEBUG_keyboard;
@@ -15,9 +13,14 @@ public class PlayerMovementGyro : MonoBehaviour
     Gyroscope gyro;
 
     [Header("-- Variables --")]
-    [SerializeField] bool hacking = false, isFlat = true; 
-    [SerializeField] float speed = 10f, rotSpeed;
-    Quaternion deviceRotation;
+    [SerializeField] bool hacking = false;
+    [SerializeField] bool isFlat = true;
+
+    [SerializeField] float walkSpeed = 1f;
+    [SerializeField] float wantedPhoneScreenAngle = 45f;
+    [SerializeField] float minTiltRequired = 0.35f;
+
+    [HideInInspector] public Vector3 tilt;
 
     void Start()
     {
@@ -32,8 +35,11 @@ public class PlayerMovementGyro : MonoBehaviour
         Debug.Log(SystemInfo.supportsGyroscope ? "Supports gyroscope" : "No gyroscope support");
     }
 
+    float currentSpeed;
+
     void Update()
     {
+
         hacking = player.hacking;
         player.playerPosition = transform.position;
 
@@ -43,26 +49,46 @@ public class PlayerMovementGyro : MonoBehaviour
             float ver = Input.GetAxis("Vertical");
             Vector3 direction = new Vector3(hor, 0, ver);
 
-            transform.Translate(direction * speed * Time.deltaTime);
-        }
+            transform.Translate(direction * walkSpeed * Time.deltaTime);
+        } // DEBUG -- keyboardinput
         else
         {
-            deviceRotation = DeviceRotation.Get();
-            Vector3 direction = new Vector3(Input.acceleration.x, -Input.acceleration.y, 0);
+            tilt = Input.acceleration;
 
             if (isFlat)
-                direction = Quaternion.Euler(-90, 0, 0) * direction;
+                tilt = Quaternion.Euler(wantedPhoneScreenAngle, 0, 0) * tilt;
 
-            // MOVEMENT
-            transform.Translate(direction * speed * Time.deltaTime, Space.World);
+            if(Mathf.Abs(tilt.y) > minTiltRequired || Mathf.Abs(tilt.x) > minTiltRequired - 0.15)
+            {
+                if(currentSpeed < walkSpeed)
+                {
+                    currentSpeed += Time.deltaTime;
+                }
+                transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime * tilt.magnitude);
+            }
+            else
+            {
+                if (currentSpeed > 0)
+                {
+                    currentSpeed -= Time.deltaTime;
+                }
+                else if(currentSpeed <= 0)
+                {
+                    currentSpeed = 0;
+                }
+                transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime * tilt.magnitude);
+            }
 
-            // ROTATION
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, targetRotation, rotSpeed * Time.deltaTime);
-
-            Debug.DrawRay(transform.position + Vector3.up, direction, Color.green);
         }
-        //playerModel.transform.rotation = Quaternion.LookRotation(direction);
+
+        // DEBUG
+        Debug.DrawRay(transform.position + Vector3.up, tilt, Color.green);
+
+    }
+
+    public Vector3 GetTilt()
+    {
+        return tilt;
     }
 
     void OnGUI()

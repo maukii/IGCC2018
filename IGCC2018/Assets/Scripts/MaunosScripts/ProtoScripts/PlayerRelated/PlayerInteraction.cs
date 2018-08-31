@@ -7,14 +7,17 @@ using UnityEngine.UI;
 public class PlayerInteraction : MonoBehaviour
 {
     public PlayerData player;
+    [SerializeField] bool hacking;
 
     public KeyCode action;
     public KeyCode changeTargetUp, changeTargetDown;
 
-    [SerializeField] int targetIndex;
-
     public List<GameObject> nearObjects = new List<GameObject>();
     [SerializeField] GameObject targetedObject = null;
+    [SerializeField] int targetIndex;
+
+    [SerializeField] float timeTakesToHack = 2f;
+
 
     public GameObject GetTargetedObject()
     {
@@ -31,6 +34,7 @@ public class PlayerInteraction : MonoBehaviour
 
     void Update()
     {
+        hacking = player.hacking;
 
         if (Input.GetKeyDown(changeTargetUp) && !player.hacking)
         {
@@ -42,32 +46,58 @@ public class PlayerInteraction : MonoBehaviour
             ChangeTargetDown();
         }
 
+        if(nearObjects.Count == 0)
+            player.hacking = false;
+
     }
 
-    public void Action()
+    public void Action() 
     {
         if (targetedObject != null)
         {
             if (targetedObject.GetComponent<Hack>() != null)
             {
-                Debug.Log("Hacked " + targetedObject.name);
                 player.hacking = true;
-                targetedObject.GetComponent<Hack>().HackObject();
-                nearObjects.Remove(targetedObject);
-
-                CheckNearest();
+                StartCoroutine(StartHack());
             }
             else if (targetedObject.GetComponent<Loot>() != null)
             {
                 Debug.Log("Looted " + targetedObject.name);
-                targetedObject.gameObject.SetActive(false);
-                // give player points
+                targetedObject.GetComponent<Loot>().GiveCandy();
+                if(!targetedObject.activeSelf)
+                {
+                    nearObjects.Remove(targetedObject);
+                    targetedObject = null;
+                    CheckNearest();
+                }
+            }
+        }
+    }
 
+    private IEnumerator StartHack()
+    {
+        GameObject hackingObject = targetedObject;
+        Debug.Log("Started hacking " + hackingObject.name);
+        yield return new WaitForSeconds(timeTakesToHack);
+
+        if(hacking)
+        {
+            if(hacking == targetedObject)
+            {
+                Debug.Log("Finished hacking");
+                targetedObject.GetComponent<Hack>().HackObject();
+                player.hacking = false;
                 nearObjects.Remove(targetedObject);
                 CheckNearest();
             }
         }
-        player.hacking = false;
+        else if(!hacking || targetedObject.GetComponent<Hack>() == null || targetedObject == null || hackingObject != targetedObject)
+        {
+            player.hacking = false;
+            Debug.Log("Player stopped hacking for some reason");
+            CheckNearest();
+        }
+
     }
 
     private void CheckNearest()

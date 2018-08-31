@@ -6,6 +6,6 @@ using UnityEngine;
 public class Hackable : ScriptableObject
 {
 
-    public bool hacked;
+    public bool hacked = false;
     
 }
