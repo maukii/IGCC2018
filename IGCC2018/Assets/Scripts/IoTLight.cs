@@ -33,7 +33,7 @@ public class IoTLight : IoTBaseObj
         }
     }
 
-    protected override bool Hack()
+    public override bool Hack()
     {
         // Check if cooldown is on
         if (!base.Hack())

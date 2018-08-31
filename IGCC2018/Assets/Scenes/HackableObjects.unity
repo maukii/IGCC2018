@@ -1212,6 +1212,11 @@ Prefab:
       propertyPath: m_TagString
       value: IoT
       objectReference: {fileID: 0}
+    - target: {fileID: 65251193900417818, guid: ce78bb6f0034dbc4fa88d1675a887383,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce78bb6f0034dbc4fa88d1675a887383, type: 2}
   m_IsPrefabParent: 0
@@ -1621,6 +1626,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7a6122690fe7e5c4882c5f45245ebb67, type: 2}
+    - target: {fileID: 135795423569743170, guid: a21b214e4bb3b614e81bda97e40db075,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a21b214e4bb3b614e81bda97e40db075, type: 2}
   m_IsPrefabParent: 0
@@ -2553,9 +2563,8 @@ GameObject:
   - component: {fileID: 1191299837}
   - component: {fileID: 1191299835}
   - component: {fileID: 1191299839}
-  - component: {fileID: 1191299840}
-  - component: {fileID: 1191299842}
   - component: {fileID: 1191299843}
+  - component: {fileID: 1191299840}
   - component: {fileID: 1191299836}
   m_Layer: 0
   m_Name: TempChar
@@ -2646,7 +2655,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1191299834}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14, y: 0.7, z: -20}
+  m_LocalPosition: {x: 2.25, y: 0.7, z: -2.68}
   m_LocalScale: {x: 0.7, y: 1.25, z: 0.7}
   m_Children:
   - {fileID: 963788553}
@@ -2671,18 +2680,6 @@ AudioListener:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1191299834}
   m_Enabled: 1
---- !u!65 &1191299842
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1191299834}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 2.5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &1191299843
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3851,9 +3848,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4347740449982310, guid: cbc6378ec79e08841a672e9b43da6e46, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
+    - target: {fileID: 1168242798198324, guid: cbc6378ec79e08841a672e9b43da6e46, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cbc6378ec79e08841a672e9b43da6e46, type: 2}

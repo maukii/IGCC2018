@@ -16,7 +16,8 @@ public class IoTDoor : IoTBaseObj
     float defaultRotY = 0.0f;
 
     // Flip door opening side
-    public bool flipDirection = false;
+    [SerializeField]
+    bool flipDirection = false;
 
     // Use this for initialization
     void Start ()
@@ -60,7 +61,7 @@ public class IoTDoor : IoTBaseObj
         }
     }
 
-    protected override bool Hack()
+    public override bool Hack()
     {
         // Check if cooldown is on
         if (!base.Hack())

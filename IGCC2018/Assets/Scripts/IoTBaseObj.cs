@@ -5,19 +5,22 @@ using UnityEngine;
 public class IoTBaseObj : MonoBehaviour
 {
     // A toggle to check if its on or off
-    public bool isActivated = false;
+    [SerializeField]
+    protected bool isActivated = false;
 
     // bool that tells whether object can be hacked or not
     protected bool canHack = false;
 
     // Duration of cooldown
-    public float hackCooldownDuration = 1.0f;
+    [SerializeField]
+    protected float hackCooldownDuration = 1.0f;
 
     // Cooldown on hack, (1 second?)
     protected float hackCooldown = 0.0f;
 
     // How long object stays activated after hack (0.0f = infinite)
-    public float activationDuration = 0.0f;
+    [SerializeField]
+    protected float activationDuration = 0.0f;
 
     // If activation has duration, reduce this one;
     protected float activationTick = 0.0f;
@@ -53,14 +56,14 @@ public class IoTBaseObj : MonoBehaviour
         //}
 
         // NOTE: TEMP delete this later
-        if (Input.GetKeyDown("space"))
-        {
-            Hack();
-        }
+        //if (Input.GetKeyDown("space"))
+        //{
+        //    Hack();
+        //}
     }
 
     // This called from player when hacking an object
-    virtual protected bool Hack()
+    virtual public bool Hack()
     {
         if (!canHack)
             return false;

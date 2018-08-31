@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ObjectFaceCamera : MonoBehaviour
 {
-    public Camera mainCamera;
+    [SerializeField]
+    Camera mainCamera;
 
 	// Use this for initialization
 	void Start ()
     {
-		
 	}
 	
 	// Update is called once per frame
