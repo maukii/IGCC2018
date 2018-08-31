@@ -11,4 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7e0b4e33c876084c9e42725f522f336, type: 3}
   m_Name: Ring
   m_EditorClassIdentifier: 
-  value: 20
+  candyLeft: 5
+  value: 1

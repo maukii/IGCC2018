@@ -13,10 +13,14 @@ public class PlayerMovementGyro : MonoBehaviour
     Gyroscope gyro;
 
     [Header("-- Variables --")]
-    [SerializeField] bool hacking = false, isFlat = true; 
-    [SerializeField] float speed = 1f, wantedPhoneScreenAngle = 45f;
-    [HideInInspector] public Vector3 tilt;
+    [SerializeField] bool hacking = false;
+    [SerializeField] bool isFlat = true;
 
+    [SerializeField] float walkSpeed = 1f;
+    [SerializeField] float wantedPhoneScreenAngle = 45f;
+    [SerializeField] float minTiltRequired = 0.35f;
+
+    [HideInInspector] public Vector3 tilt;
 
     void Start()
     {
@@ -31,6 +35,8 @@ public class PlayerMovementGyro : MonoBehaviour
         Debug.Log(SystemInfo.supportsGyroscope ? "Supports gyroscope" : "No gyroscope support");
     }
 
+    float currentSpeed;
+
     void Update()
     {
 
@@ -43,7 +49,7 @@ public class PlayerMovementGyro : MonoBehaviour
             float ver = Input.GetAxis("Vertical");
             Vector3 direction = new Vector3(hor, 0, ver);
 
-            transform.Translate(direction * speed * Time.deltaTime);
+            transform.Translate(direction * walkSpeed * Time.deltaTime);
         } // DEBUG -- keyboardinput
         else
         {
@@ -52,19 +58,31 @@ public class PlayerMovementGyro : MonoBehaviour
             if (isFlat)
                 tilt = Quaternion.Euler(wantedPhoneScreenAngle, 0, 0) * tilt;
 
-            if(tilt.y > .1f)
+            if(Mathf.Abs(tilt.y) > minTiltRequired || Mathf.Abs(tilt.x) > minTiltRequired - 0.15)
             {
-                transform.Translate(Vector3.forward * speed * Time.deltaTime * tilt.y); // works need to polish
+                if(currentSpeed < walkSpeed)
+                {
+                    currentSpeed += Time.deltaTime;
+                }
+                transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime * tilt.magnitude);
             }
-            else if(tilt.y < -0.2f)
+            else
             {
-                transform.Translate(Vector3.back * speed * Time.deltaTime * -tilt.y * 0.5f); // backing up half as fast
+                if (currentSpeed > 0)
+                {
+                    currentSpeed -= Time.deltaTime;
+                }
+                else if(currentSpeed <= 0)
+                {
+                    currentSpeed = 0;
+                }
+                transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime * tilt.magnitude);
             }
+
         }
 
         // DEBUG
         Debug.DrawRay(transform.position + Vector3.up, tilt, Color.green);
-        Debug.Log(tilt.y);
 
     }
 

@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class Hack : MonoBehaviour
 {
-
+    public PlayerData player;
     public Hackable hackable;
+
     public bool hacked;
+
+    private void Awake()
+    {
+        hackable.hacked = false;
+        hacked = hackable.hacked;
+    }
 
     public void HackObject()
     {
-        hackable.hacked = true;
         hacked = true;
     }
 

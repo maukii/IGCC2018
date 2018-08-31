@@ -7,4 +7,6 @@ public class PlayerData : ScriptableObject
 {
     public bool hacking;
     public Vector3 playerPosition;
+
+    public float candyCount;
 }

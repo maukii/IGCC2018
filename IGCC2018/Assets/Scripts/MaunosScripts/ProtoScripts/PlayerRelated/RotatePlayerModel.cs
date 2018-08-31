@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class RotatePlayerModel : MonoBehaviour
 {
-    float rot;
-    bool backing;
 
     [Header("-- Variables --")]
-    [SerializeField] float turnSpeed = 5, targetRotation;
-    [SerializeField] Vector2 turnLimitMinMax;
+    [SerializeField] float turnSmoothning = 5;
+    [SerializeField] float minTiltRequired = .2f;
 
     PlayerMovementGyro movementScript;
 
@@ -18,44 +16,17 @@ public class RotatePlayerModel : MonoBehaviour
         movementScript = GetComponentInParent<PlayerMovementGyro>();
     }
 
-    void LateUpdate()
+    void Update()
     {
-        //targetRotation = Mathf.Atan2(tilt.x, tilt.z) * Mathf.Rad2Deg; // not in use atm
 
+        Vector3 tilt = movementScript.GetTilt();        
+        float targetRotation = Mathf.Atan2(tilt.x, tilt.y) * Mathf.Rad2Deg; // used to get right phones angle 
 
-        Vector3 tilt = movementScript.GetTilt();
-
-        if (tilt.y < 0.2f)
-            backing = true;
-        else
-            backing = false;
-        
-
-        if(tilt.y > 0)
+        if(Mathf.Abs(tilt.x) > minTiltRequired || Mathf.Abs(tilt.y) > minTiltRequired)
         {
-            if (tilt.x < -0.1f)
-            {
-                rot -= turnSpeed * Time.deltaTime;
-            }
-            if (tilt.x > 0.1f)
-            {
-                rot += turnSpeed * Time.deltaTime;
-            }
+            Quaternion wantedRotation = Quaternion.Euler(transform.rotation.x, targetRotation, transform.rotation.z);
+            transform.rotation = Quaternion.Slerp(transform.rotation, wantedRotation, turnSmoothning * Time.deltaTime);
         }
-        else
-        {
-            if (tilt.x < -0.1f)
-            {
-                rot += turnSpeed * Time.deltaTime;
-            }
-            if (tilt.x > 0.1f)
-            {
-                rot -= turnSpeed * Time.deltaTime;
-            }
-        }
-
-        Quaternion tarRot = Quaternion.Euler(0, rot, 0);
-        transform.rotation = Quaternion.Slerp(transform.rotation, tarRot, turnSpeed * Time.deltaTime * Mathf.Abs(tilt.x));
 
     }
 }
