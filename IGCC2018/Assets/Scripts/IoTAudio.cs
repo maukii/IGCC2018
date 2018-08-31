@@ -58,6 +58,6 @@ public class IoTAudio : IoTBaseObj
     {
         base.Selected();
 
-        selectionTick = 0.2f;
+        selectionTick = 0.1f;
     }
 }

@@ -9,6 +9,7 @@ public class CandyPot : MonoBehaviour
     int totalCandy = 30;
 
     // how much candy is left
+    [HideInInspector]
     public int remaindingCandy = 0;
 
     // Duration needed to loot a single candy

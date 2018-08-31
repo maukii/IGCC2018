@@ -77,7 +77,10 @@ public class TempPlayer : MonoBehaviour
         {
             if (reachableIoT.Count > 0)
             {
-                reachableIoT[Mathf.FloorToInt(selectedIndex)].GetComponent<IoTBaseObj>().Hack();
+                /// so many ifs oh god
+                if (gameObject.GetComponent<BatteryCharge>().CanHack(20.0f))
+                    if (reachableIoT[Mathf.FloorToInt(selectedIndex)].GetComponent<IoTBaseObj>().Hack())
+                        gameObject.GetComponent<BatteryCharge>().DrainBattery(20.0f);
 
                 //foreach (GameObject obj in reachableIoT)
                 //    obj.GetComponent<IoTBaseObj>().Hack();
@@ -161,7 +164,7 @@ public class TempPlayer : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.collider.gameObject.Equals(lastHitObject))
+            if (hit.collider.gameObject.Equals(lastHitObject) || !hit.collider.gameObject.GetComponent<MeshRenderer>())
                 return;
 
             // If hitting something new or the player, set the last hit object back to its original material
@@ -241,12 +244,20 @@ public class TempPlayer : MonoBehaviour
 
         selectedIndex = Mathf.Repeat(selectedIndex, reachableIoT.Count);
 
-        print(Mathf.FloorToInt(selectedIndex));
+        //print(Mathf.FloorToInt(selectedIndex));
 
-        print(reachableIoT[Mathf.FloorToInt(selectedIndex)]);
+        //print(reachableIoT[Mathf.FloorToInt(selectedIndex)]);
 
         // NOTE: delete this if check later.
         if (reachableIoT[Mathf.FloorToInt(selectedIndex)].GetComponent<IoTBaseObj>())
             reachableIoT[Mathf.FloorToInt(selectedIndex)].GetComponent<IoTBaseObj>().Selected();
+    }
+
+    public String getSelectedIoT()
+    {
+        if (reachableIoT.Count <= 0)
+            return "Nothing Selected";
+
+        return reachableIoT[Mathf.FloorToInt(selectedIndex)].gameObject.name;
     }
 }
