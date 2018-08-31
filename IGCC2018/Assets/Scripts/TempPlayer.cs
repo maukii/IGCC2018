@@ -139,10 +139,10 @@ public class TempPlayer : MonoBehaviour
     {
         if (other.CompareTag("CandyPot") && Input.GetKey(KeyCode.F))
         {
-            float distance = other.ClosestPoint(transform.position).magnitude;
+            //float distance = other.ClosestPoint(transform.position).magnitude;
 
-            if (distance > 2.5f)
-                return;
+            //if (distance > 2.5f)
+            //    return;
 
             other.GetComponentInParent<CandyPot>().Loot(this);
         }
