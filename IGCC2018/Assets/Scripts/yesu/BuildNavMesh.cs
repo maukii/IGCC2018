@@ -24,6 +24,7 @@ public class BuildNavMesh : SingletonMonoBehaviour<BuildNavMesh> {
     void Start () {
         StartCoroutine("AutoBakeRepeat");
 
+        GetComponent<NavMeshSurface>().BuildNavMesh();
     }
 
     // Update is called once per frame
@@ -34,7 +35,7 @@ public class BuildNavMesh : SingletonMonoBehaviour<BuildNavMesh> {
     {
         yield return new WaitForSeconds(_bakeInterval);
 
-        GetComponent<NavMeshSurface>().BuildNavMesh();
-        StartCoroutine("AutoBakeRepeat");
+        //GetComponent<NavMeshSurface>().BuildNavMesh();
+        //StartCoroutine("AutoBakeRepeat");
     }
 }

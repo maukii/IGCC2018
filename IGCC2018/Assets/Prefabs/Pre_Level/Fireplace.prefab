@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4347740449982310}
   - component: {fileID: 33111701110900898}
   - component: {fileID: 23472823524283594}
+  - component: {fileID: 65671503555669318}
   m_Layer: 0
   m_Name: Fireplace
   m_TagString: Untagged
@@ -98,8 +99,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1168242798198324}
-  m_LocalRotation: {x: 0.00000008146034, y: -1.110223e-16, z: 1.1102233e-16, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -4}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 27.796, y: 0, z: -18.194}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 4234449724895342}
@@ -107,7 +108,7 @@ Transform:
   - {fileID: 4895217731658526}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!4 &4895217731658526
 Transform:
   m_ObjectHideFlags: 1
@@ -212,6 +213,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1904219482842758}
   m_Mesh: {fileID: 4300002, guid: e141b1362811bcb40be67109ccbd165f, type: 3}
+--- !u!65 &65671503555669318
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1168242798198324}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.020000013, y: 0.020216923, z: 0.009988986}
+  m_Center: {x: -1.548193e-17, y: 0.010108462, z: -0.0050055105}
 --- !u!95 &95702190298705220
 Animator:
   serializedVersion: 3
@@ -322,7 +335,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -2076003061
+  randomSeed: -1707541908
   InitialModule:
     serializedVersion: 3
     enabled: 1

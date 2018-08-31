@@ -29,10 +29,6 @@ public class Bot : MonoBehaviour {
     [SerializeField]
     private BotState _currentState = null;
 
-    // Debug text
-    [SerializeField]
-    Text _currentStateText;
-
     private Patrol _patrolState = new Patrol();
     private Chase _chaseState = new Chase();
     private Search _seachState = new Search();
@@ -63,7 +59,6 @@ public class Bot : MonoBehaviour {
     void Update()
     {
         _currentState.Execute(this);
-        _currentStateText.text = _currentState.ToString();
 
         SearchPlayer();
     }

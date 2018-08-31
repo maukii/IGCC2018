@@ -5,7 +5,8 @@ using UnityEngine;
 public class CandyPot : MonoBehaviour
 {
     // how much candy this object has in total
-    public int totalCandy = 30;
+    [SerializeField]
+    int totalCandy = 30;
 
     // how much candy is left
     public int remaindingCandy = 0;

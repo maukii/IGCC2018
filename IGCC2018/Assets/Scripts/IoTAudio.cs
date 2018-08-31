@@ -32,7 +32,7 @@ public class IoTAudio : IoTBaseObj
         }
     }
 
-    protected override bool Hack()
+    public override bool Hack()
     {
         // Check if cooldown is on
         if (!base.Hack())
