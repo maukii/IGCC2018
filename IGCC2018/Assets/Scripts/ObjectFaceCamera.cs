@@ -10,6 +10,9 @@ public class ObjectFaceCamera : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        // If no camera attached, take main camera
+        if (!mainCamera)
+            mainCamera = Camera.main;
 	}
 	
 	// Update is called once per frame

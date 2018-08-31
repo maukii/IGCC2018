@@ -100,7 +100,7 @@ public class TempPlayer : MonoBehaviour
             lastHitObject = hit.collider.gameObject;
             lastObjectMaterial = hit.collider.gameObject.GetComponent<MeshRenderer>().material;
 
-            Material newMat = Resources.Load("Translucent", typeof(Material)) as Material;
+            Material newMat = Resources.Load("Materials/Translucent", typeof(Material)) as Material;
             hit.collider.gameObject.GetComponent<MeshRenderer>().material = newMat;
         }
     }
@@ -164,5 +164,9 @@ public class TempPlayer : MonoBehaviour
         print(Mathf.FloorToInt(selectedIndex));
 
         print(reachableIoT[Mathf.FloorToInt(selectedIndex)]);
+
+        // NOTE: delete this if check later.
+        if (reachableIoT[Mathf.FloorToInt(selectedIndex)].GetComponent<IoTBaseObj>())
+            reachableIoT[Mathf.FloorToInt(selectedIndex)].GetComponent<IoTBaseObj>().Selected();
     }
 }
