@@ -113,14 +113,15 @@ public class Patrol : BotState
         _ray = new Ray(rayPos, agent.transform.up * -1);
 
         // ray casting to around Objects
-        RaycastHit[] hitinfos = Physics.SphereCastAll(_ray, _detectingRange);
+        RaycastHit[] hitinfos = Physics.SphereCastAll(_ray, 3);
 
         // if detect hackable object change target
         foreach (var hitinfo in hitinfos)
         {
-            // detect "light" object by tag
+            // detect "light" object by component
             GameObject hitObj = hitinfo.transform.gameObject;
-            if (hitObj.tag != "light" || hitObj == _lightingTarget)
+            IoTLight lightCmp = hitObj.GetComponent<IoTLight>();
+            if (lightCmp== null || hitObj == _lightingTarget)
             {
                 continue;
             }
@@ -128,6 +129,7 @@ public class Patrol : BotState
             // TODO: check light ON/OFF
             if (true)
             {
+                Debug.Log("detect light Object");
                 _lightingTarget = hitObj;
                 points[destPoint] = _lightingTarget.transform;
                 GotoNextPoint(agent);
