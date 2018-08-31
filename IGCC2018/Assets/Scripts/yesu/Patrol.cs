@@ -8,7 +8,7 @@ using UnityEngine.AI;
 public class Patrol : BotState
 {
     private const int RAY_HEIGHT = 5;
-    private const float NEARBY_DISTANCE = 0.5f;
+    private const float NEARBY_DISTANCE = 0.1f;
 
     // array of patrolling points
     private Transform[] points;
