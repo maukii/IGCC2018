@@ -10,18 +10,18 @@ public class RotatePlayerModel : MonoBehaviour
     [SerializeField] float minTiltRequired = .2f;
 
     PlayerMovementGyro movementScript;
-    TempPlayer1 tp1;
+    TempPlayer tp;
 
     void Start()
     {
         movementScript = GetComponentInParent<PlayerMovementGyro>();
-        tp1 = GetComponentInParent<TempPlayer1>();
+        tp = GetComponentInParent<TempPlayer>();
     }
 
     void Update()
     {
 
-        Vector3 tilt = tp1.GetTilt();        
+        Vector3 tilt = tp.GetTilt();        
         float targetRotation = Mathf.Atan2(tilt.x, tilt.y) * Mathf.Rad2Deg; // used to get right phones angle 
 
         if(Mathf.Abs(tilt.x) > minTiltRequired || Mathf.Abs(tilt.y) > minTiltRequired)

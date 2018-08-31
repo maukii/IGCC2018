@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,13 +19,49 @@ public class TempPlayer : MonoBehaviour
     // Selected IoT to hack
     float selectedIndex = 0.0f;
 
-	// Use this for initialization
-	void Start ()
+
+
+
+    [Header("Use if no device connected")]
+    public bool DEBUG_useKeyboard;
+
+    Gyroscope gyro;
+
+    [Header("-- Variables --")]
+    [SerializeField]
+    bool useDebug = false;
+    [SerializeField] bool hacking = false;
+    [SerializeField] bool isFlat = true;
+
+    [SerializeField] float walkSpeed = 1f;
+    [SerializeField] float wantedPhoneScreenAngle = 45f;
+    [SerializeField] float minTiltRequired = 0.35f;
+    float currentSpeed;
+
+    [HideInInspector] public Vector3 tilt;
+
+    void Start()
     {
-	}
-	
-	// Update is called once per frame
-	void Update ()
+        gyro = Input.gyro;
+        DEBUG_useKeyboard = SystemInfo.supportsGyroscope ? false : true;
+
+        if (SystemInfo.supportsGyroscope)
+        {
+            Input.gyro.enabled = true;
+            Screen.orientation = ScreenOrientation.LandscapeLeft;
+        }
+
+        Debug.Log(SystemInfo.supportsGyroscope ? "Supports gyroscope" : "No gyroscope support");
+    }
+
+
+    public Vector3 GetTilt()
+    {
+        return tilt;
+    }
+
+
+    void Update ()
     {
         // This turns the material of objects that are in the way of the camera viewing the player to translucent
         hideObjects();
@@ -48,8 +85,51 @@ public class TempPlayer : MonoBehaviour
         }
 
         // By using simple move, manually placing gravity isnt needed.
-        gameObject.GetComponent<CharacterController>().SimpleMove(new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical") * 400.0f * Time.deltaTime));
-        gameObject.GetComponent<CharacterController>().SimpleMove(new Vector3((Input.GetAxis("Horizontal") * 400.0f * Time.deltaTime), 0.0f, 0.0f));
+
+        if(DEBUG_useKeyboard)
+        {
+            gameObject.GetComponent<CharacterController>().SimpleMove(new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical") * 400.0f * Time.deltaTime));
+            gameObject.GetComponent<CharacterController>().SimpleMove(new Vector3((Input.GetAxis("Horizontal") * 400.0f * Time.deltaTime), 0.0f, 0.0f));
+        }
+        else
+        {
+            Movement();
+        }
+
+        if (useDebug)
+        {
+            Debug.DrawRay(transform.position + Vector3.up, tilt, Color.green);
+        }
+
+    }
+
+    private void Movement()
+    {
+        tilt = Input.acceleration;
+
+        if (isFlat)
+            tilt = Quaternion.Euler(wantedPhoneScreenAngle, 0, 0) * tilt;
+
+        if (Mathf.Abs(tilt.y) > minTiltRequired || Mathf.Abs(tilt.x) > minTiltRequired - 0.15)
+        {
+            if (currentSpeed < walkSpeed)
+            {
+                currentSpeed += Time.deltaTime;
+            }
+            transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime * tilt.magnitude);
+        }
+        else
+        {
+            if (currentSpeed > 0)
+            {
+                currentSpeed -= Time.deltaTime;
+            }
+            else if (currentSpeed <= 0)
+            {
+                currentSpeed = 0;
+            }
+            transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime * tilt.magnitude);
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -77,7 +157,7 @@ public class TempPlayer : MonoBehaviour
     {
         RaycastHit hit;
 
-        Ray ray = gameObject.GetComponentInChildren<Camera>().ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0));
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0));
 
         if (Physics.Raycast(ray, out hit))
         {
