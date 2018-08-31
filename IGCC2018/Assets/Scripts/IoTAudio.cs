@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class IoTAudio : IoTBaseObj
 {
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    protected override void Start()
     {
-	}
+        base.Start();
+    }
 
     // Update is called once per frame
     protected override void Update()
@@ -51,5 +52,12 @@ public class IoTAudio : IoTBaseObj
             gameObject.GetComponent<AudioSource>().Stop();
 
         return true;
+    }
+
+    public override void Selected()
+    {
+        base.Selected();
+
+        selectionTick = 0.2f;
     }
 }

@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class IoTLight : IoTBaseObj
 {
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    protected override void Start()
     {
+        base.Start();
+
         gameObject.GetComponent<Light>().intensity = 0.0f;
     }
 
@@ -53,5 +55,12 @@ public class IoTLight : IoTBaseObj
             gameObject.GetComponent<Light>().intensity = 0.0f;
 
         return true;
+    }
+
+    public override void Selected()
+    {
+        base.Selected();
+
+        selectionTick = 0.2f;
     }
 }

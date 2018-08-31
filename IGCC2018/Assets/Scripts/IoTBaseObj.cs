@@ -25,11 +25,20 @@ public class IoTBaseObj : MonoBehaviour
     // If activation has duration, reduce this one;
     protected float activationTick = 0.0f;
 
-	// Use this for initialization
-	void Start()
+    // how long object stays selected for.
+    protected float selectionTick = 0.0f;
+
+    // initial material
+    protected Material defaultMat = null;
+
+    // Use this for initialization
+    virtual protected void Start()
     {
-        // nothing, i guess?
-	}
+        if (gameObject.GetComponent<MeshRenderer>())
+            defaultMat = gameObject.GetComponent<MeshRenderer>().material;
+        else
+            defaultMat = gameObject.GetComponentInParent<MeshRenderer>().material;
+    }
 	
 	// Update is called once per frame
 	virtual protected void Update()
@@ -43,6 +52,23 @@ public class IoTBaseObj : MonoBehaviour
         else
         {
             canHack = true;
+        }
+
+        if (selectionTick > 0.0f)
+        {
+            selectionTick -= Time.deltaTime;
+
+            if (gameObject.GetComponent<MeshRenderer>())
+                gameObject.GetComponent<MeshRenderer>().material = Resources.Load("Materials/Selected", typeof(Material)) as Material;
+            else
+                gameObject.GetComponentInParent<MeshRenderer>().material = Resources.Load("Materials/Selected", typeof(Material)) as Material;
+        }
+        else
+        {
+            if (gameObject.GetComponent<MeshRenderer>())
+                gameObject.GetComponent<MeshRenderer>().material = defaultMat;
+            else
+                gameObject.GetComponentInParent<MeshRenderer>().material = defaultMat;
         }
 
         /// Shifted into the objects itself, since some doesn't have activation time
@@ -69,5 +95,9 @@ public class IoTBaseObj : MonoBehaviour
             return false;
 
         return true;
+    }
+
+    virtual public void Selected()
+    {
     }
 }

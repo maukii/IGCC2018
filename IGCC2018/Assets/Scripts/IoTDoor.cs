@@ -20,13 +20,14 @@ public class IoTDoor : IoTBaseObj
     bool flipDirection = false;
 
     // Use this for initialization
-    void Start ()
+    protected override void Start()
     {
+        base.Start();
+
         // Edit cooldownDuration and hackCooldown here
         // Default cooldown duration is 1.0f.
 
         defaultRotY = transform.rotation.eulerAngles.y;
-
     }
 
     // Update is called once per frame
@@ -89,6 +90,13 @@ public class IoTDoor : IoTBaseObj
             rotateDir = -90;
 
         return true;
+    }
+
+    public override void Selected()
+    {
+        base.Selected();
+
+        selectionTick = 0.2f;
     }
 
     void RotateDoor()
