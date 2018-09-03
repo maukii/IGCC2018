@@ -8,3 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlayerControls.unity
     guid: 101e541adb123ea46a5b6d76922f7a26
+  - enabled: 1
+    path: Assets/Scenes/HackableObjects.unity
+    guid: f1351494cc14d9a43a241547bd0b52d6
+  - enabled: 1
+    path: Assets/Scenes/LevelTwo.unity
+    guid: 5d3201f374698984a9e6cc0799512cb5

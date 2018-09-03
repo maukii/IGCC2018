@@ -41,6 +41,11 @@ public class CandyPot : MonoBehaviour
         }
         else
         {
+            if (gameObject.GetComponent<AudioSource>())
+                gameObject.GetComponent<AudioSource>().Play();
+            else
+                print("No audio detected");
+
             lootTick = lootDuration;
 
             --remaindingCandy;

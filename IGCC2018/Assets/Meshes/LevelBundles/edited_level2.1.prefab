@@ -1356,7 +1356,7 @@ GameObject:
   - component: {fileID: 4880704933794348}
   - component: {fileID: 33859825169159518}
   - component: {fileID: 23754924703562646}
-  - component: {fileID: 65535161202787094}
+  - component: {fileID: 64163805207304024}
   m_Layer: 0
   m_Name: Stairs4
   m_TagString: Untagged
@@ -11019,6 +11019,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1353504769261310}
   m_Mesh: {fileID: 4300288, guid: 16b4feadc49c52c4cb4b9af29b672774, type: 3}
+--- !u!64 &64163805207304024
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1431360312739156}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300066, guid: 16b4feadc49c52c4cb4b9af29b672774, type: 3}
 --- !u!65 &65017787661522804
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -12087,18 +12101,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.4063754, y: 2.4063752, z: 0.08093786}
   m_Center: {x: 3.609562, y: 1.2031876, z: -0.040468924}
---- !u!65 &65535161202787094
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1431360312739156}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4.470959, y: 5.1099124, z: 5.9921646}
-  m_Center: {x: -2.2354796, y: 2.5549562, z: -2.5588899}
 --- !u!65 &65572345326295370
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -12995,6 +12997,7 @@ MonoBehaviour:
   hackCooldownDuration: 1
   activationDuration: 0
   flipDirection: 0
+  isLid: 0
 --- !u!114 &114204683301934910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13010,6 +13013,7 @@ MonoBehaviour:
   hackCooldownDuration: 1
   activationDuration: 0
   flipDirection: 0
+  isLid: 0
 --- !u!114 &114209596823260252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13025,6 +13029,7 @@ MonoBehaviour:
   hackCooldownDuration: 1
   activationDuration: 0
   flipDirection: 0
+  isLid: 0
 --- !u!114 &114596860428418634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13040,6 +13045,7 @@ MonoBehaviour:
   hackCooldownDuration: 1
   activationDuration: 0
   flipDirection: 0
+  isLid: 0
 --- !u!114 &114666300977228544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13055,6 +13061,7 @@ MonoBehaviour:
   hackCooldownDuration: 1
   activationDuration: 0
   flipDirection: 0
+  isLid: 0
 --- !u!114 &114825601037968868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13070,6 +13077,7 @@ MonoBehaviour:
   hackCooldownDuration: 1
   activationDuration: 0
   flipDirection: 0
+  isLid: 0
 --- !u!114 &114909774641829252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13085,6 +13093,7 @@ MonoBehaviour:
   hackCooldownDuration: 1
   activationDuration: 0
   flipDirection: 0
+  isLid: 0
 --- !u!114 &114989847497746998
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13100,3 +13109,4 @@ MonoBehaviour:
   hackCooldownDuration: 1
   activationDuration: 0
   flipDirection: 0
+  isLid: 0
