@@ -181,6 +181,13 @@ ModelImporter:
     100346: Wall98
     100348: Wall99
     100350: Wall_door
+    100352: Door52
+    100354: Door53
+    100356: Door54
+    100358: Door55
+    100360: Door56
+    100362: Door57
+    100364: Door58
     400000: CandyBowl2
     400002: DiningTable
     400004: Door32
@@ -357,6 +364,13 @@ ModelImporter:
     400346: Wall98
     400348: Wall99
     400350: Wall_door
+    400352: Door52
+    400354: Door53
+    400356: Door54
+    400358: Door55
+    400360: Door56
+    400362: Door57
+    400364: Door58
     2300000: CandyBowl2
     2300002: DiningTable
     2300004: Door32
@@ -517,6 +531,13 @@ ModelImporter:
     2300314: Wall97
     2300316: Wall98
     2300318: Wall99
+    2300320: Door52
+    2300322: Door53
+    2300324: Door54
+    2300326: Door55
+    2300328: Door56
+    2300330: Door57
+    2300332: Door58
     3300000: CandyBowl2
     3300002: DiningTable
     3300004: Door32
@@ -677,6 +698,13 @@ ModelImporter:
     3300314: Wall97
     3300316: Wall98
     3300318: Wall99
+    3300320: Door52
+    3300322: Door53
+    3300324: Door54
+    3300326: Door55
+    3300328: Door56
+    3300330: Door57
+    3300332: Door58
     4300000: Wall1
     4300002: Wall
     4300004: Wall3
@@ -837,6 +865,13 @@ ModelImporter:
     4300314: Stairs4
     4300316: Microwave32
     4300318: polySurface152
+    4300320: Door52
+    4300322: Door53
+    4300324: Door54
+    4300326: Door55
+    4300328: Door56
+    4300330: Door57
+    4300332: Door58
     9500000: //RootNode
   materials:
     importMaterials: 1
