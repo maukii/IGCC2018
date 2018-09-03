@@ -361,11 +361,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 153852366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db1c67e2bf769f49be39ab432be7f2c, type: 3}
+  m_Script: {fileID: 11500000, guid: ea26a8fae17189b4ca70742c6c014f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DEBUG_useKeyboard: 0
-  useDebug: 1
+  useDebug: 0
   hacking: 0
   isFlat: 1
   walkSpeed: 1

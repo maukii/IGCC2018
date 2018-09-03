@@ -5,7 +5,5 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Hackable : ScriptableObject
 {
-
-    public bool hacked = false;
-    
+    public bool hacked = false; 
 }

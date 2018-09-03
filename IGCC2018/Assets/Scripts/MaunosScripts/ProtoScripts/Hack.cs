@@ -18,6 +18,8 @@ public class Hack : MonoBehaviour
     public void HackObject()
     {
         hacked = true;
+        //transform.Rotate(0,-45,0);
+        GetComponentInParent<Animator>().SetTrigger("Open");
     }
 
 }

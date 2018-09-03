@@ -9,14 +9,17 @@ public class PlayerInteraction : MonoBehaviour
     public PlayerData player;
     [SerializeField] bool hacking;
 
+    // PC inputs
     public KeyCode action;
     public KeyCode changeTargetUp, changeTargetDown;
 
+    [Header("-- Variables --")]
     public List<GameObject> nearObjects = new List<GameObject>();
     [SerializeField] GameObject targetedObject = null;
     [SerializeField] int targetIndex;
-
     [SerializeField] float timeTakesToHack = 2f;
+    [SerializeField] Material defaultMat;
+    [SerializeField] Material highlightMat;
 
 
     public GameObject GetTargetedObject()
@@ -36,19 +39,43 @@ public class PlayerInteraction : MonoBehaviour
     {
         hacking = player.hacking;
 
-        if (Input.GetKeyDown(changeTargetUp) && !player.hacking)
+        if(TempPlayer.useKeyboardInput)
         {
-            ChangeTargetUp();
+            if (Input.GetKeyDown(changeTargetUp) && !player.hacking)
+            {
+                ChangeTargetUp();
+            }
+
+            if(Input.GetKeyDown(changeTargetDown) && !player.hacking)
+            {
+                ChangeTargetDown();
+            }
+
+            if(Input.GetKeyDown(action) && !player.hacking)
+            {
+                Action();
+            }
         }
 
-        if(Input.GetKeyDown(changeTargetDown) && !player.hacking)
-        {
-            ChangeTargetDown();
-        }
+        Highlighting();
 
         if(nearObjects.Count == 0)
             player.hacking = false;
+    }
 
+    private void Highlighting()
+    {
+        for (int i = 0; i < nearObjects.Count; i++)
+        {
+            if (nearObjects[i].gameObject == targetedObject)
+            {
+                nearObjects[i].GetComponent<MeshRenderer>().material = highlightMat;
+            }
+            else
+            {
+                nearObjects[i].GetComponent<MeshRenderer>().material = defaultMat;
+            }
+        }
     }
 
     public void Action() 
@@ -86,6 +113,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 Debug.Log("Finished hacking");
                 targetedObject.GetComponent<Hack>().HackObject();
+                targetedObject.GetComponent<MeshRenderer>().material = defaultMat;
                 player.hacking = false;
                 nearObjects.Remove(targetedObject);
                 CheckNearest();
@@ -106,12 +134,15 @@ public class PlayerInteraction : MonoBehaviour
         {
             foreach (GameObject a in nearObjects)
             {
-                if(a.gameObject.GetComponent<Hack>() && !a.gameObject.GetComponent<Hack>().hacked)
+                if(a.gameObject.GetComponent<Hack>() != null)
                 {
-                    targetedObject = a;
-                    break;
+                    if(!a.gameObject.GetComponent<Hack>().hacked)
+                    {
+                        targetedObject = a;
+                        break;
+                    }
                 }
-                else if(a.gameObject.GetComponent<Loot>() && a.gameObject.activeSelf)
+                if(a.gameObject.GetComponent<Loot>() != null && a.gameObject.activeSelf)
                 {
                     targetedObject = a;
                     break;
@@ -157,12 +188,14 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((other.gameObject.GetComponent<Loot>() != null || (other.gameObject.GetComponent<Hack>() != null && !other.gameObject.GetComponent<Hack>().hacked)) && !nearObjects.Contains(other.gameObject) && other.gameObject.activeSelf)
+        if((other.gameObject.GetComponent<Loot>() != null || (other.gameObject.GetComponent<Hack>() != null && !other.gameObject.GetComponent<Hack>().hacked)) && !nearObjects.Contains(other.gameObject) && other.gameObject.activeSelf)
         {
             nearObjects.Add(other.gameObject);
 
             if (targetedObject == null)
                 targetedObject = other.gameObject;
+
+            CheckNearest();
         }
     }
 
@@ -170,12 +203,12 @@ public class PlayerInteraction : MonoBehaviour
     {
         if ((other.gameObject.GetComponent<Hack>() != null || other.gameObject.GetComponent<Loot>() != null) && nearObjects.Contains(other.gameObject))
         {
+            other.gameObject.GetComponent<MeshRenderer>().material = defaultMat;
             nearObjects.Remove(other.gameObject);
+            CheckNearest();
         }
 
         if (nearObjects.Count == 0)
             targetedObject = null;
-        else if (nearObjects.Count == 1)
-            targetedObject = nearObjects[0];
     }
 }

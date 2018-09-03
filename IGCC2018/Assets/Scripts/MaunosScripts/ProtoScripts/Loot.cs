@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Loot : MonoBehaviour
 {
-
     public Lootable lootable;
     public PlayerData player;
 
