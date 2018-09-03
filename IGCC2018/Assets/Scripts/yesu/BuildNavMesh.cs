@@ -20,7 +20,6 @@ public class BuildNavMesh : SingletonMonoBehaviour<BuildNavMesh> {
     // Use this for initialization
     void Start () {
 
-        GetComponent<NavMeshSurface>().BuildNavMesh();
     }
 
 
