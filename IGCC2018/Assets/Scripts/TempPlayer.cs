@@ -174,6 +174,7 @@ public class TempPlayer : MonoBehaviour
                 if (lastHitObject)
                 {
                     lastHitObject.GetComponent<MeshRenderer>().material = lastObjectMaterial;
+                    lastHitObject = null;
                 }
 
                 if (hit.collider.gameObject.CompareTag("Player"))

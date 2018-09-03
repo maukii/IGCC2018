@@ -19,6 +19,10 @@ public class IoTDoor : IoTBaseObj
     [SerializeField]
     bool flipDirection = false;
 
+    // Flip way of opening
+    [SerializeField]
+    bool isLid = false;
+
     // Use this for initialization
     protected override void Start()
     {
@@ -101,22 +105,45 @@ public class IoTDoor : IoTBaseObj
 
     void RotateDoor()
     {
-        if (flipDirection)
+        if (isLid)
         {
-            transform.Rotate(Vector3.up * -rotateDir * Time.deltaTime);
+            if (flipDirection)
+            {
+                transform.Rotate(Vector3.up * -rotateDir * Time.deltaTime);
 
-            /// oh god this took me longer than I expected it to take
-            isRot = (rotateDir > 0) ?
-                !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, (defaultRotY - 90.0f))) <= 1.0f) :
-                !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, defaultRotY)) <= 1.0f);
+                isRot = (rotateDir > 0) ?
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, defaultRotY)) <= 1.0f) :
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, (defaultRotY - 90.0f))) <= 1.0f);
+            }
+            else
+            {
+                transform.Rotate(Vector3.up * rotateDir * Time.deltaTime);
+
+                /// oh god this took me longer than I expected it to take
+                isRot = (rotateDir > 0) ?
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, defaultRotY)) <= 1.0f) :
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, (defaultRotY + 90.0f))) <= 1.0f);
+            }
         }
         else
         {
-            transform.Rotate(Vector3.up * rotateDir * Time.deltaTime);
+            if (flipDirection)
+            {
+                transform.Rotate(Vector3.up * -rotateDir * Time.deltaTime);
 
-            isRot = (rotateDir > 0) ?
-                !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, (defaultRotY + 90.0f))) <= 1.0f) :
-                !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, defaultRotY)) <= 1.0f);
+                /// oh god this took me longer than I expected it to take
+                isRot = (rotateDir > 0) ?
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, (defaultRotY - 90.0f))) <= 1.0f) :
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, defaultRotY)) <= 1.0f);
+            }
+            else
+            {
+                transform.Rotate(Vector3.up * rotateDir * Time.deltaTime);
+
+                isRot = (rotateDir > 0) ?
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, (defaultRotY + 90.0f))) <= 1.0f) :
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, defaultRotY)) <= 1.0f);
+            }
         }
     }
 }

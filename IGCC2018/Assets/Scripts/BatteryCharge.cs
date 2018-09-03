@@ -29,7 +29,7 @@ public class BatteryCharge : MonoBehaviour
         if (currCharge < maxCharge)
             Recharge();
 
-        print(currCharge);
+        //print(currCharge);
 	}
 
     void Recharge()
