@@ -6,7 +6,8 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 
 
-public class Bot : MonoBehaviour {
+public class Bot : MonoBehaviour
+{
 
     public NavMeshAgent Agent { get { return _agent; } }
     // target object(player)
@@ -20,6 +21,10 @@ public class Bot : MonoBehaviour {
     private NavMeshAgent _agent;
 
     private bool _isChasing;
+
+    // debug text 
+    [SerializeField]
+    private Text _currentStateText;
 
     // parent object of patrol points
     [SerializeField]
@@ -42,7 +47,8 @@ public class Bot : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         // Initialize each State
         _patrolState.Init(_patrolingPoints, _detectingRange);
         _chaseState.SetTarget(_target);
@@ -89,8 +95,6 @@ public class Bot : MonoBehaviour {
     // On lost player 3secons continue chase
     IEnumerator LostPlayer()
     {
-        Debug.Log("LostPlayer");
-
         yield return new WaitForSeconds(3.0f);
 
         ChangeState(_patrolState);
@@ -100,6 +104,8 @@ public class Bot : MonoBehaviour {
     void ChangeState(BotState newState)
     {
         _currentState = newState;
-        Debug.Log("StateChanged:" + _currentState.ToString());
+
+        if (_currentStateText != null)
+            _currentStateText.text = _currentState.ToString();
     }
 }

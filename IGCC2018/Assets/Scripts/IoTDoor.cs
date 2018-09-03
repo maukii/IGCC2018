@@ -96,7 +96,7 @@ public class IoTDoor : IoTBaseObj
     {
         base.Selected();
 
-        selectionTick = 0.2f;
+        selectionTick = 0.1f;
     }
 
     void RotateDoor()
