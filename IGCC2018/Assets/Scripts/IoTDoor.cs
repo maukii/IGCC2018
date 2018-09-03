@@ -13,7 +13,7 @@ public class IoTDoor : IoTBaseObj
     bool isRot = false;
 
     // Closed door position
-    float defaultRotY = 0.0f;
+    float defaultAxisRot = 0.0f;
 
     // Flip door opening side
     [SerializeField]
@@ -31,7 +31,11 @@ public class IoTDoor : IoTBaseObj
         // Edit cooldownDuration and hackCooldown here
         // Default cooldown duration is 1.0f.
 
-        defaultRotY = transform.rotation.eulerAngles.y;
+
+        if (isLid)
+            defaultAxisRot = transform.rotation.eulerAngles.x;
+        else
+            defaultAxisRot = transform.rotation.eulerAngles.y;
     }
 
     // Update is called once per frame
@@ -79,6 +83,11 @@ public class IoTDoor : IoTBaseObj
         activationTick = activationDuration;
         isActivated = !isActivated;
 
+        if (gameObject.GetComponent<AudioSource>())
+            gameObject.GetComponent<AudioSource>().Play();
+        else
+            print("No audio detected");
+
         //// Open/Close door(Sliding Door)
         //if (isActivated)
         //    gameObject.GetComponent<Transform>().Translate(new Vector3(1.0f, 0.0f, 0.0f));
@@ -112,8 +121,8 @@ public class IoTDoor : IoTBaseObj
                 transform.Rotate(Vector3.up * -rotateDir * Time.deltaTime);
 
                 isRot = (rotateDir > 0) ?
-                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, defaultRotY)) <= 1.0f) :
-                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, (defaultRotY - 90.0f))) <= 1.0f);
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, defaultAxisRot + 90.0f)) <= 1.0f) :
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, defaultAxisRot)) <= 1.0f);
             }
             else
             {
@@ -121,8 +130,8 @@ public class IoTDoor : IoTBaseObj
 
                 /// oh god this took me longer than I expected it to take
                 isRot = (rotateDir > 0) ?
-                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, defaultRotY)) <= 1.0f) :
-                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, (defaultRotY + 90.0f))) <= 1.0f);
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, (defaultAxisRot - 90.0f))) <= 1.0f) :
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, defaultAxisRot)) <= 1.0f);
             }
         }
         else
@@ -133,17 +142,25 @@ public class IoTDoor : IoTBaseObj
 
                 /// oh god this took me longer than I expected it to take
                 isRot = (rotateDir > 0) ?
-                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, (defaultRotY - 90.0f))) <= 1.0f) :
-                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, defaultRotY)) <= 1.0f);
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, (defaultAxisRot - 90.0f))) <= 1.0f) :
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, defaultAxisRot)) <= 1.0f);
             }
             else
             {
                 transform.Rotate(Vector3.up * rotateDir * Time.deltaTime);
 
                 isRot = (rotateDir > 0) ?
-                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, (defaultRotY + 90.0f))) <= 1.0f) :
-                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, defaultRotY)) <= 1.0f);
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, (defaultAxisRot + 90.0f))) <= 1.0f) :
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, defaultAxisRot)) <= 1.0f);
             }
+        }
+
+        if (!isRot)
+        {
+            if (gameObject.GetComponent<AudioSource>())
+                gameObject.GetComponent<AudioSource>().Stop();
+            else
+                print("No audio detected");
         }
     }
 }

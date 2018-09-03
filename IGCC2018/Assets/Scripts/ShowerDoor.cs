@@ -62,6 +62,11 @@ public class ShowerDoor : MonoBehaviour
             isOpen = true;
             isRot = true;
 
+            if (gameObject.GetComponent<AudioSource>())
+                gameObject.GetComponent<AudioSource>().Play();
+            else
+                print("No audio detected");
+
             rotDir = -90.0f;
         }
     }
@@ -73,5 +78,13 @@ public class ShowerDoor : MonoBehaviour
         isRot = (rotDir > 0) ?
             !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, defaultRotation)) <= 1.0f) :
             !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, (defaultRotation - 90.0f))) <= 1.0f);
+
+        if (!isRot)
+        {
+            if (gameObject.GetComponent<AudioSource>())
+                gameObject.GetComponent<AudioSource>().Stop();
+            else
+                print("No audio detected");
+        }
     }
 }
