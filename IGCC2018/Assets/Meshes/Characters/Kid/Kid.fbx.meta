@@ -3,7 +3,7 @@ guid: e4f0477e64585d34097b6d538ec78f23
 timeCreated: 1535456301
 licenseType: Pro
 ModelImporter:
-  serializedVersion: 22
+  serializedVersion: 19
   fileIDToRecycleName:
     100000: Ankle.L
     100002: Ankle.R
@@ -74,6 +74,16 @@ ModelImporter:
     100132: LegPole.L_end
     100134: LegPole.R
     100136: LegPole.R_end
+    100138: Hat01
+    100140: Hat02
+    100142: Hat02_end
+    100144: Camera
+    100146: Kid_Eye
+    100148: Lamp
+    100150: Eye.L
+    100152: Eye.L_end
+    100154: Eye.R
+    100156: Eye.R_end
     400000: Ankle.L
     400002: Ankle.R
     400004: Arm.L
@@ -143,20 +153,35 @@ ModelImporter:
     400132: LegPole.L_end
     400134: LegPole.R
     400136: LegPole.R_end
+    400138: Hat01
+    400140: Hat02
+    400142: Hat02_end
+    400144: Camera
+    400146: Kid_Eye
+    400148: Lamp
+    400150: Eye.L
+    400152: Eye.L_end
+    400154: Eye.R
+    400156: Eye.R_end
     2100000: Material
     2100002: SeeTrhougt
     2100004: Black
+    2300000: Kid_Eye
+    3300000: Kid_Eye
     4300000: Kid_Mesh
-    7400000: Running
+    4300002: Kid_Eye
+    7400000: Walking
     7400002: Kid_Armature|Kid_MeshAction
+    7400004: Idle
+    7400006: ReachCandy
+    7400008: ReachBag
+    7400010: Scared
     9500000: //RootNode
     13700000: Kid_Mesh
-  externalObjects: {}
   materials:
     importMaterials: 0
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -169,17 +194,15 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    importAnimatedCustomProperties: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Running
+      name: Walking
       takeName: Kid_Armature|Kid_ArmatureAction
       firstFrame: 5
       lastFrame: 25
@@ -207,10 +230,10 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Kid_Armature|Kid_MeshAction
-      takeName: Kid_Armature|Kid_MeshAction
-      firstFrame: 0
-      lastFrame: 1
+      name: Idle
+      takeName: Kid_Armature|Kid_ArmatureAction
+      firstFrame: 30
+      lastFrame: 72
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -234,24 +257,547 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: ReachCandy
+      takeName: Kid_Armature|Kid_ArmatureAction
+      firstFrame: 110
+      lastFrame: 140
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Kid_Armature
+        weight: 1
+      - path: Kid_Armature/Base
+        weight: 1
+      - path: Kid_Armature/Base/ArmPole.L
+        weight: 1
+      - path: Kid_Armature/Base/ArmPole.L/ArmPole.L_end
+        weight: 1
+      - path: Kid_Armature/Base/ArmPole.R
+        weight: 1
+      - path: Kid_Armature/Base/ArmPole.R/ArmPole.R_end
+        weight: 1
+      - path: Kid_Armature/Base/FootTarget.L
+        weight: 1
+      - path: Kid_Armature/Base/FootTarget.L/FootTarget.L_end
+        weight: 1
+      - path: Kid_Armature/Base/FootTarget.R
+        weight: 1
+      - path: Kid_Armature/Base/FootTarget.R/FootTarget.R_end
+        weight: 1
+      - path: Kid_Armature/Base/HandTarget.L
+        weight: 1
+      - path: Kid_Armature/Base/HandTarget.L/HandTarget.L_end
+        weight: 1
+      - path: Kid_Armature/Base/HandTarget.R
+        weight: 1
+      - path: Kid_Armature/Base/HandTarget.R/HandTarget.R_end
+        weight: 1
+      - path: Kid_Armature/Base/LegPole.L
+        weight: 1
+      - path: Kid_Armature/Base/LegPole.L/LegPole.L_end
+        weight: 1
+      - path: Kid_Armature/Base/LegPole.R
+        weight: 1
+      - path: Kid_Armature/Base/LegPole.R/LegPole.R_end
+        weight: 1
+      - path: Kid_Armature/Hips
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.L
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.L/LegLower.L
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.L/LegLower.L/Ankle.L
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.L/LegLower.L/Ankle.L/Foot.L
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.L/LegLower.L/Ankle.L/Foot.L/Foot.L_end
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.R
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.R/LegLower.R
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.R/LegLower.R/Ankle.R
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.R/LegLower.R/Ankle.R/Foot.R
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.R/LegLower.R/Ankle.R/Foot.R/Foot.R_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger1.1.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger1.1.L/Finger1.2.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger1.1.L/Finger1.2.L/Finger1.2.L_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger2.1.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger2.1.L/Finger2.2.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger2.1.L/Finger2.2.L/Finger2.2.L_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger3.1.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger3.1.L/Finger3.2.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger3.1.L/Finger3.2.L/Finger3.2.L_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Thumb1.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Thumb1.L/Thumb2.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Thumb1.L/Thumb2.L/Thumb2.L_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger1.1.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger1.1.R/Finger1.2.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger1.1.R/Finger1.2.R/Finger1.2.R_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger2.1.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger2.1.R/Finger2.2.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger2.1.R/Finger2.2.R/Finger2.2.R_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger3.1.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger3.1.R/Finger3.2.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger3.1.R/Finger3.2.R/Finger3.2.R_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Thumb1.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Thumb1.R/Thumb2.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Thumb1.R/Thumb2.R/Thumb2.R_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Eye.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Eye.L/Eye.L_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Eye.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Eye.R/Eye.R_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Hat01
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Hat01/Hat02
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Hat01/Hat02/Hat02_end
+        weight: 1
+      - path: Kid_Mesh
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: ReachBag
+      takeName: Kid_Armature|Kid_ArmatureAction
+      firstFrame: 75
+      lastFrame: 105
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Kid_Armature
+        weight: 1
+      - path: Kid_Armature/Base
+        weight: 1
+      - path: Kid_Armature/Base/ArmPole.L
+        weight: 1
+      - path: Kid_Armature/Base/ArmPole.L/ArmPole.L_end
+        weight: 1
+      - path: Kid_Armature/Base/ArmPole.R
+        weight: 1
+      - path: Kid_Armature/Base/ArmPole.R/ArmPole.R_end
+        weight: 1
+      - path: Kid_Armature/Base/FootTarget.L
+        weight: 1
+      - path: Kid_Armature/Base/FootTarget.L/FootTarget.L_end
+        weight: 1
+      - path: Kid_Armature/Base/FootTarget.R
+        weight: 1
+      - path: Kid_Armature/Base/FootTarget.R/FootTarget.R_end
+        weight: 1
+      - path: Kid_Armature/Base/HandTarget.L
+        weight: 1
+      - path: Kid_Armature/Base/HandTarget.L/HandTarget.L_end
+        weight: 1
+      - path: Kid_Armature/Base/HandTarget.R
+        weight: 1
+      - path: Kid_Armature/Base/HandTarget.R/HandTarget.R_end
+        weight: 1
+      - path: Kid_Armature/Base/LegPole.L
+        weight: 1
+      - path: Kid_Armature/Base/LegPole.L/LegPole.L_end
+        weight: 1
+      - path: Kid_Armature/Base/LegPole.R
+        weight: 1
+      - path: Kid_Armature/Base/LegPole.R/LegPole.R_end
+        weight: 1
+      - path: Kid_Armature/Hips
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.L
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.L/LegLower.L
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.L/LegLower.L/Ankle.L
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.L/LegLower.L/Ankle.L/Foot.L
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.L/LegLower.L/Ankle.L/Foot.L/Foot.L_end
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.R
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.R/LegLower.R
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.R/LegLower.R/Ankle.R
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.R/LegLower.R/Ankle.R/Foot.R
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.R/LegLower.R/Ankle.R/Foot.R/Foot.R_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger1.1.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger1.1.L/Finger1.2.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger1.1.L/Finger1.2.L/Finger1.2.L_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger2.1.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger2.1.L/Finger2.2.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger2.1.L/Finger2.2.L/Finger2.2.L_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger3.1.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger3.1.L/Finger3.2.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger3.1.L/Finger3.2.L/Finger3.2.L_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Thumb1.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Thumb1.L/Thumb2.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Thumb1.L/Thumb2.L/Thumb2.L_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger1.1.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger1.1.R/Finger1.2.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger1.1.R/Finger1.2.R/Finger1.2.R_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger2.1.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger2.1.R/Finger2.2.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger2.1.R/Finger2.2.R/Finger2.2.R_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger3.1.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger3.1.R/Finger3.2.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger3.1.R/Finger3.2.R/Finger3.2.R_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Thumb1.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Thumb1.R/Thumb2.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Thumb1.R/Thumb2.R/Thumb2.R_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Eye.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Eye.L/Eye.L_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Eye.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Eye.R/Eye.R_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Hat01
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Hat01/Hat02
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Hat01/Hat02/Hat02_end
+        weight: 1
+      - path: Kid_Mesh
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Scared
+      takeName: Kid_Armature|Kid_ArmatureAction
+      firstFrame: 145
+      lastFrame: 153
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Kid_Armature
+        weight: 1
+      - path: Kid_Armature/Base
+        weight: 1
+      - path: Kid_Armature/Base/ArmPole.L
+        weight: 1
+      - path: Kid_Armature/Base/ArmPole.L/ArmPole.L_end
+        weight: 1
+      - path: Kid_Armature/Base/ArmPole.R
+        weight: 1
+      - path: Kid_Armature/Base/ArmPole.R/ArmPole.R_end
+        weight: 1
+      - path: Kid_Armature/Base/FootTarget.L
+        weight: 1
+      - path: Kid_Armature/Base/FootTarget.L/FootTarget.L_end
+        weight: 1
+      - path: Kid_Armature/Base/FootTarget.R
+        weight: 1
+      - path: Kid_Armature/Base/FootTarget.R/FootTarget.R_end
+        weight: 1
+      - path: Kid_Armature/Base/HandTarget.L
+        weight: 1
+      - path: Kid_Armature/Base/HandTarget.L/HandTarget.L_end
+        weight: 1
+      - path: Kid_Armature/Base/HandTarget.R
+        weight: 1
+      - path: Kid_Armature/Base/HandTarget.R/HandTarget.R_end
+        weight: 1
+      - path: Kid_Armature/Base/LegPole.L
+        weight: 1
+      - path: Kid_Armature/Base/LegPole.L/LegPole.L_end
+        weight: 1
+      - path: Kid_Armature/Base/LegPole.R
+        weight: 1
+      - path: Kid_Armature/Base/LegPole.R/LegPole.R_end
+        weight: 1
+      - path: Kid_Armature/Hips
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.L
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.L/LegLower.L
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.L/LegLower.L/Ankle.L
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.L/LegLower.L/Ankle.L/Foot.L
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.L/LegLower.L/Ankle.L/Foot.L/Foot.L_end
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.R
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.R/LegLower.R
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.R/LegLower.R/Ankle.R
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.R/LegLower.R/Ankle.R/Foot.R
+        weight: 1
+      - path: Kid_Armature/Hips/LegUpper.R/LegLower.R/Ankle.R/Foot.R/Foot.R_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger1.1.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger1.1.L/Finger1.2.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger1.1.L/Finger1.2.L/Finger1.2.L_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger2.1.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger2.1.L/Finger2.2.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger2.1.L/Finger2.2.L/Finger2.2.L_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger3.1.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger3.1.L/Finger3.2.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Finger3.1.L/Finger3.2.L/Finger3.2.L_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Thumb1.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Thumb1.L/Thumb2.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.L/Arm.L/Forearm.L/Hand.L/Thumb1.L/Thumb2.L/Thumb2.L_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger1.1.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger1.1.R/Finger1.2.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger1.1.R/Finger1.2.R/Finger1.2.R_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger2.1.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger2.1.R/Finger2.2.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger2.1.R/Finger2.2.R/Finger2.2.R_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger3.1.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger3.1.R/Finger3.2.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Finger3.1.R/Finger3.2.R/Finger3.2.R_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Thumb1.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Thumb1.R/Thumb2.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Clavicle.R/Arm.R/Forearm.R/Hand.R/Thumb1.R/Thumb2.R/Thumb2.R_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Eye.L
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Eye.L/Eye.L_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Eye.R
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Eye.R/Eye.R_end
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Hat01
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Hat01/Hat02
+        weight: 1
+      - path: Kid_Armature/Hips/Spine01/Spine02/Neck/Head/Hat01/Hat02/Hat02_end
+        weight: 1
+      - path: Kid_Mesh
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
-    preserveHierarchy: 0
-    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
@@ -261,7 +807,6 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-    normalCalculationMode: 4
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
