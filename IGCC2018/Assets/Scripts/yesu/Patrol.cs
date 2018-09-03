@@ -9,7 +9,7 @@ public class Patrol : BotState
 {
     private const int RAY_HEIGHT = 5;
 
-    private const float LIGHT_DETECT_DISTANCE = 4.0f;
+    private const float LIGHT_DETECT_DISTANCE = 6.0f;
     private const float NEARBY_DISTANCE = 0.1f;
 
     // array of patrolling points
@@ -17,9 +17,6 @@ public class Patrol : BotState
 
     // patrolling points num（default = 0）
     private int destPoint = 0;
-
-    // ray for detect around object
-    private Ray _ray;
 
     private float _detectingRange;
 
@@ -118,25 +115,46 @@ public class Patrol : BotState
     {
         // ray reset
         Vector3 rayPos = agent.transform.position;
-        rayPos.y = rayPos.y + RAY_HEIGHT;
-        _ray = new Ray(rayPos, agent.transform.up * -1);
+
+        Vector3 rayPosUp = new Vector3(rayPos.x, rayPos.y + RAY_HEIGHT, rayPos.z);
+        // ray for detect around object
+        Ray ray = new Ray(rayPosUp, agent.transform.up * -1);
 
         // ray casting to around Objects
-        RaycastHit[] hitinfos = Physics.SphereCastAll(_ray, LIGHT_DETECT_DISTANCE);
+        RaycastHit[] hitinfos = Physics.SphereCastAll(ray, LIGHT_DETECT_DISTANCE);
 
         // if detect hackable object change target
         foreach (var hitinfo in hitinfos)
         {
             // detect "light" object by component
             GameObject hitObj = hitinfo.transform.gameObject;
-            
+
             IoTLight lightCmp = hitObj.GetComponent<IoTLight>();
-            if (lightCmp== null || hitObj == _lightingTarget || hitObj ==_oldLight)
+            if (lightCmp == null || hitObj == _lightingTarget || hitObj == _oldLight)
             {
                 continue;
             }
+
+            // TODO: check ghost can see light
+            Ray lightRay = new Ray(rayPos, hitObj.transform.position - rayPos);
+            Debug.DrawRay(lightRay.origin, lightRay.direction * 10, Color.white, 5.0f);
+
+            if (Physics.Raycast(lightRay))
+            {
+                // can't see
+                continue;
+            }
+            else
+            {
+                // can see
+                Debug.Log("ghost can see light");
+            }
+
+            // TODO: change distance to target
+
+
             // TODO: check light ON/OFF   
-            else if(true)
+            if (true)//( hitObj.GetComponent<Light>().intensity > 0)
             {
                 Debug.Log("detect light Object");
                 _lightingTarget = hitObj;

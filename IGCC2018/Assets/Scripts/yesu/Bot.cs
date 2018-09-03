@@ -73,7 +73,7 @@ public class Bot : MonoBehaviour
     {
         // Raycasting to player
         NavMeshHit hit;
-        if (NavMesh.Raycast(transform.position, _target.position, out hit, NavMesh.AllAreas))
+        if (_agent.Raycast(_target.position, out hit))
         {
             // can't detect player
             if (_isChasing == true)
