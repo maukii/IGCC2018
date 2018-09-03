@@ -20,7 +20,7 @@ public class TempPlayer : MonoBehaviour
     float selectedIndex = 0.0f;
 
 
-
+    public static bool useKeyboardInput;
 
     [Header("Use if no device connected")]
     public bool DEBUG_useKeyboard;
@@ -28,8 +28,7 @@ public class TempPlayer : MonoBehaviour
     Gyroscope gyro;
 
     [Header("-- Variables --")]
-    [SerializeField]
-    bool useDebug = false;
+    [SerializeField] bool useDebug = false;
     [SerializeField] bool hacking = false;
     [SerializeField] bool isFlat = true;
 
@@ -43,12 +42,16 @@ public class TempPlayer : MonoBehaviour
     void Start()
     {
         gyro = Input.gyro;
-        DEBUG_useKeyboard = SystemInfo.supportsGyroscope ? false : true;
 
         if (SystemInfo.supportsGyroscope)
         {
             Input.gyro.enabled = true;
             Screen.orientation = ScreenOrientation.LandscapeLeft;
+        }
+        else
+        {
+            DEBUG_useKeyboard = true;
+            useKeyboardInput = true;
         }
 
         Debug.Log(SystemInfo.supportsGyroscope ? "Supports gyroscope" : "No gyroscope support");
@@ -89,14 +92,16 @@ public class TempPlayer : MonoBehaviour
 
         // By using simple move, manually placing gravity isnt needed.
 
-        if(DEBUG_useKeyboard)
+        if(useKeyboardInput)
         {
-            gameObject.GetComponent<CharacterController>().SimpleMove(new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical") * 400.0f * Time.deltaTime));
-            gameObject.GetComponent<CharacterController>().SimpleMove(new Vector3((Input.GetAxis("Horizontal") * 400.0f * Time.deltaTime), 0.0f, 0.0f));
+            //gameObject.GetComponent<CharacterController>().SimpleMove(new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical") * 400.0f * Time.deltaTime));
+            //gameObject.GetComponent<CharacterController>().SimpleMove(new Vector3((Input.GetAxis("Horizontal") * 400.0f * Time.deltaTime), 0.0f, 0.0f));
+
+            KeyboardMovement();
         }
         else
         {
-            Movement();
+            MobileMovement();
         }
 
         if (useDebug)
@@ -106,7 +111,13 @@ public class TempPlayer : MonoBehaviour
 
     }
 
-    private void Movement()
+    private void KeyboardMovement()
+    {
+        tilt = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+        transform.Translate(Vector3.forward * walkSpeed * Time.deltaTime * tilt.magnitude);
+    }
+
+    private void MobileMovement()
     {
         tilt = Input.acceleration;
 
@@ -232,7 +243,7 @@ public class TempPlayer : MonoBehaviour
         // If there's nothing to hack...
         if (reachableIoT.Count <= 0)
         {
-            print("Nothing to hack");
+            //print("Nothing to hack");
             return;
         }
 

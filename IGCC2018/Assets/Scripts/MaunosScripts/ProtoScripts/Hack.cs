@@ -17,9 +17,27 @@ public class Hack : MonoBehaviour
 
     public void HackObject()
     {
-        hacked = true;
-        //transform.Rotate(0,-45,0);
-        GetComponentInParent<Animator>().SetTrigger("Open");
+        if (hackable.name != "Door")
+        {
+            hacked = true;
+        }
+
+        if(gameObject.GetComponentInParent<Animator>() != null)
+        {
+            GetComponentInParent<Animator>().SetTrigger("IsActive");
+        }
+
+        AudioManager.instance.PlaySound(gameObject.tag);
+    }
+
+    public void UnhackObject()
+    {
+        hacked = false;
+        if(gameObject.GetComponentInParent<Animator>() != null)
+        {
+            GetComponentInParent<Animator>().SetTrigger("Disable");
+        }
+        AudioManager.instance.StopSound(gameObject.tag);
     }
 
 }

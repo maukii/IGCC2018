@@ -267,11 +267,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 153852368}
-  - component: {fileID: 153852367}
+  - component: {fileID: 153852372}
   - component: {fileID: 153852371}
   - component: {fileID: 153852369}
   - component: {fileID: 153852370}
-  - component: {fileID: 153852372}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -279,25 +278,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &153852367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 153852366}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4979af384677f14199b4f11b101bed4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 11400000, guid: b2a02cf0dfe22524186450d471c2f846, type: 2}
-  DEBUG_keyboard: 0
-  hacking: 0
-  isFlat: 1
-  walkSpeed: 1
-  wantedPhoneScreenAngle: 0
-  minTiltRequired: 0.35
-  tilt: {x: 0, y: 0, z: 0}
 --- !u!4 &153852368
 Transform:
   m_ObjectHideFlags: 0
@@ -353,6 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSmoothning: 2
   minTiltRequired: 0.2
+  targetRotation: 0
 --- !u!114 &153852372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,6 +353,62 @@ MonoBehaviour:
   wantedPhoneScreenAngle: 45
   minTiltRequired: 0.35
   tilt: {x: 0, y: 0, z: 0}
+--- !u!1 &259965980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 259965982}
+  - component: {fileID: 259965981}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &259965981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 259965980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c831bdacf6c7a444e986dab2db2464ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: AlarmClock1
+    clip: {fileID: 8300000, guid: 308ef9e12285cdd49a837c54d8aa98e2, type: 3}
+    loop: 1
+    volume: 1
+    source: {fileID: 0}
+  - name: Door
+    clip: {fileID: 8300000, guid: 77ae705df8069e54d8fc6f0d61a259be, type: 3}
+    loop: 0
+    volume: 0.35
+    source: {fileID: 0}
+  - name: Candy
+    clip: {fileID: 8300000, guid: 9cc812e5cbfaff747b9c0e5761e34c87, type: 3}
+    loop: 0
+    volume: 0.35
+    source: {fileID: 0}
+--- !u!4 &259965982
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 259965980}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &329279132
 Prefab:
   m_ObjectHideFlags: 0
@@ -730,7 +767,7 @@ GameObject:
   - component: {fileID: 601563310}
   m_Layer: 0
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -795,11 +832,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 601563305}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.656539, y: 17.460146, z: -20.532515}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1700154320}
-  m_RootOrder: 4
+  m_Father: {fileID: 1466365059}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &601563310
 MonoBehaviour:
@@ -829,7 +866,7 @@ GameObject:
   - component: {fileID: 613083586}
   m_Layer: 0
   m_Name: Ring (2)
-  m_TagString: Untagged
+  m_TagString: Candy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -913,7 +950,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1700154320}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &634946662 stripped
 Transform:
@@ -1511,6 +1548,8 @@ MonoBehaviour:
   targetedObject: {fileID: 0}
   targetIndex: 0
   timeTakesToHack: 2
+  defaultMat: {fileID: 0}
+  highlightMat: {fileID: 0}
 --- !u!23 &1011024334
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1583,7 +1622,7 @@ GameObject:
   - component: {fileID: 1233674046}
   m_Layer: 0
   m_Name: Ring (1)
-  m_TagString: Untagged
+  m_TagString: Candy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1667,7 +1706,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1700154320}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1235986194
 GameObject:
@@ -1683,7 +1722,7 @@ GameObject:
   - component: {fileID: 1235986195}
   m_Layer: 0
   m_Name: Ring
-  m_TagString: Untagged
+  m_TagString: Candy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2134,6 +2173,53 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1446758620}
+--- !u!1 &1466365057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1466365059}
+  - component: {fileID: 1466365058}
+  m_Layer: 0
+  m_Name: DoorPivot
+  m_TagString: Door
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!95 &1466365058
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1466365057}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6fc2a191e68467e42801b81e736f4c45, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!4 &1466365059
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1466365057}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -2, y: 0, z: -2}
+  m_LocalScale: {x: 0.1, y: 2, z: 1}
+  m_Children:
+  - {fileID: 601563309}
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1513769024 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1632940685482050, guid: 45b5b2c3b1427f44d81dd35006642212,
@@ -2159,6 +2245,8 @@ MonoBehaviour:
   targetedObject: {fileID: 0}
   targetIndex: 0
   timeTakesToHack: 2
+  defaultMat: {fileID: 2100000, guid: d594db7a4faa4d941848aaa6f649950f, type: 2}
+  highlightMat: {fileID: 2100000, guid: 036a38800e3fce942ad0196ab3b0613d, type: 2}
 --- !u!65 &1513769026
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2381,7 +2469,6 @@ Transform:
   - {fileID: 1553818246}
   - {fileID: 1117443532}
   - {fileID: 1235986199}
-  - {fileID: 601563309}
   - {fileID: 1233674050}
   - {fileID: 613083590}
   - {fileID: 843100035}

@@ -28,6 +28,7 @@ public class Loot : MonoBehaviour
     {
         player.candyCount += lootable.value;
         candyLeft--;
+        AudioManager.instance.PlaySound(gameObject.tag);
 
         if(candyLeft <= 0)
         {

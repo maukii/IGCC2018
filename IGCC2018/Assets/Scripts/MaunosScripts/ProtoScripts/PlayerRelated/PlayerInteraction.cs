@@ -10,7 +10,6 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] bool hacking;
 
     // PC inputs
-    public bool useKeyboard = false;
     public KeyCode action;
     public KeyCode changeTargetUp, changeTargetDown;
 
@@ -40,7 +39,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         hacking = player.hacking;
 
-        if(/* TempPlayer.useKeyboardInput */ useKeyboard)
+        if(TempPlayer.useKeyboardInput)
         {
             if (Input.GetKeyDown(changeTargetUp) && !player.hacking)
             {
