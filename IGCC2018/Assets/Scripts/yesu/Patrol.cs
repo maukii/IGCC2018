@@ -8,9 +8,8 @@ using UnityEngine.AI;
 public class Patrol : BotState
 {
     private const int RAY_HEIGHT = 5;
-
     private const float LIGHT_DETECT_DISTANCE = 6.0f;
-    private const float NEARBY_DISTANCE = 0.1f;
+    private const float NEARBY_DISTANCE = 0.5f;
 
     // array of patrolling points
     private Transform[] points;
@@ -23,9 +22,10 @@ public class Patrol : BotState
     GameObject _patrolPoints = null;
     GameObject _hackableTarget = null;
     GameObject _lightingTarget = null;
+    GameObject _oldHackable = null;
     GameObject _oldLight = null;
 
-
+    private float _distanceToDistination = NEARBY_DISTANCE;
 
     // Execute patrolState
     public override void Execute(Bot bot)
@@ -33,20 +33,21 @@ public class Patrol : BotState
         NavMeshAgent agent = bot.Agent;
 
         //  set next position if agent arived at nearby to destination
-        if (!agent.pathPending && agent.remainingDistance < NEARBY_DISTANCE)
+        if (!agent.pathPending && agent.remainingDistance < _distanceToDistination)
         {
             _oldLight = _lightingTarget;
+            _oldHackable = _hackableTarget;
             _lightingTarget = null;
             GotoNextPoint(agent);
         }
 
         // detecting
         if (!_lightingTarget)
-            SearchLightObject(agent);
-        //// Do not search for hackable objects when lightingTarget target exists
-        //if (!_lightingTarget)
-        //    SearchHackable(agent);
+        {
+            SearchHackable(agent);
 
+            SearchLightObject(agent);
+        }
     }
 
     // Initialize patrolState
@@ -82,34 +83,37 @@ public class Patrol : BotState
         destPoint = (destPoint + 1) % points.Length;
     }
 
-    //private void SearchHackable(NavMeshAgent agent)
-    //{
-    //    // ray reset
-    //    Vector3 rayPos = agent.transform.position;
-    //    rayPos.y = rayPos.y + RAY_HEIGHT;
-    //    _ray = new Ray(rayPos, agent.transform.up * -1);
+    private void SearchHackable(NavMeshAgent agent)
+    {
+        // ray reset
+        Vector3 rayPos = agent.transform.position;
+        rayPos.y = rayPos.y + RAY_HEIGHT;
+        Ray ray = new Ray(rayPos, agent.transform.up * -1);
 
-    //    // ray casting to around Objects
-    //    RaycastHit[] hitinfos = Physics.SphereCastAll(_ray, _detectingRange);
+        // ray casting to around Objects
+        RaycastHit[] hitinfos = Physics.SphereCastAll(ray, _detectingRange);
 
-    //    // if detect hackable object change target
-    //    foreach (var hitinfo in hitinfos)
-    //    {
-    //        // detect "hackable" object by tag
-    //        GameObject hitObj = hitinfo.transform.gameObject;
-    //        if (hitObj.tag == "Hackable" && hitObj != _hackableTarget)
-    //        {
-    //            _hackableTarget = hitObj;
-    //            points[destPoint] = _hackableTarget.transform;
-    //            GotoNextPoint(agent);
-    //            InitPatrolPoints();
+        // if detect hackable object change target
+        foreach (var hitinfo in hitinfos)
+        {
+            // detect "IoT" object by tag
+            GameObject hitObj = hitinfo.transform.gameObject;
+            if (hitObj.tag != "IoT" || hitObj == _hackableTarget || hitObj == _oldHackable)
+                continue;
 
-    //            return;
-    //        }
-    //    }
+            // check IoT object "isActive"
+            if (FindIoT(hitObj))
+            {
+                _hackableTarget = hitObj;
+                points[destPoint] = _hackableTarget.transform;
+                GotoNextPoint(agent);
+                InitPatrolPoints();
 
-    //    _hackableTarget = null;
-    //}
+                return;
+            }
+        }
+        _hackableTarget = null;
+    }
 
     private void SearchLightObject(NavMeshAgent agent)
     {
@@ -135,28 +139,17 @@ public class Patrol : BotState
                 continue;
             }
 
-            // TODO: check ghost can see light
+            // check ghost can see light
             Ray lightRay = new Ray(rayPos, hitObj.transform.position - rayPos);
-            Debug.DrawRay(lightRay.origin, lightRay.direction * 10, Color.white, 5.0f);
+            RaycastHit hit;
+            Physics.SphereCast(lightRay, 3.0f, out hit);
 
-            if (Physics.Raycast(lightRay))
-            {
-                // can't see
+            if (hit.transform.gameObject == hitObj)
                 continue;
-            }
-            else
+
+            // check light object "isActive"
+            if (FindIoT(hitObj))
             {
-                // can see
-                Debug.Log("ghost can see light");
-            }
-
-            // TODO: change distance to target
-
-
-            // TODO: check light ON/OFF   
-            if (true)//( hitObj.GetComponent<Light>().intensity > 0)
-            {
-                Debug.Log("detect light Object");
                 _lightingTarget = hitObj;
                 points[destPoint] = _lightingTarget.transform;
                 GotoNextPoint(agent);
@@ -164,9 +157,35 @@ public class Patrol : BotState
 
                 return;
             }
-
         }
-
     }
 
+    // Assume this is the IoT target or something
+    bool FindIoT(GameObject target)
+    {
+        IoTBaseObj iot = target.GetComponent<IoTBaseObj>();
+
+        // TRUE = its on
+        if (iot!= null&& iot.GetActivated())
+        {
+            // Check the type of the IoT.
+            switch (target.GetComponent<IoTBaseObj>().GetIoTType())
+            {
+                case "Door":
+                    target.GetComponent<IoTBaseObj>().Disable();
+                    return true;
+                case "Audio":
+                    target.GetComponent<IoTBaseObj>().Disable();
+                    return true;
+                case "Light":
+                    target.GetComponent<IoTBaseObj>().Disable();
+                    return true;
+
+                default:
+                    // If not tagged properly, ignore it
+                    return false;
+            }
+        }
+        return false;
+    }
 }

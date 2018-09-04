@@ -36,7 +36,6 @@ public class Bot : MonoBehaviour
 
     private Patrol _patrolState = new Patrol();
     private Chase _chaseState = new Chase();
-    private Search _seachState = new Search();
 
 
     private void Awake()
