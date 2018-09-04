@@ -8,29 +8,18 @@ public class IoTAudio : IoTBaseObj
     protected override void Start()
     {
         base.Start();
+
+        // null check
+        if (objectType == null)
+        {
+            objectType = "Audio";
+        }
     }
 
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
-
-        // Check if there is a activation duration
-        if (activationDuration > 0.0f)
-        {
-            // If active... (Run the disable once)
-            if (isActivated)
-            {
-                if (activationTick > 0.0f)
-                    activationTick -= Time.deltaTime;
-                else
-                {
-                    isActivated = false;
-
-                    gameObject.GetComponent<AudioSource>().Stop();
-                }
-            }
-        }
     }
 
     public override bool Hack()
@@ -59,5 +48,14 @@ public class IoTAudio : IoTBaseObj
         base.Selected();
 
         selectionTick = 0.1f;
+    }
+
+    public override void Disable()
+    {
+        base.Disable();
+
+        isActivated = false;
+
+        gameObject.GetComponent<AudioSource>().Stop();
     }
 }

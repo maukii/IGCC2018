@@ -23,10 +23,19 @@ public class IoTDoor : IoTBaseObj
     [SerializeField]
     bool isLid = false;
 
+    // Leeway of detecting if door is open or closed
+    float deltaOffset = 2.0f;
+
     // Use this for initialization
     protected override void Start()
     {
         base.Start();
+
+        // null check
+        if (objectType.Length == 0)
+        {
+            objectType = "Door";
+        }
 
         // Edit cooldownDuration and hackCooldown here
         // Default cooldown duration is 1.0f.
@@ -45,29 +54,6 @@ public class IoTDoor : IoTBaseObj
 
         if (isRot)
             RotateDoor();
-
-        // Check if there is a activation duration
-        if (activationDuration > 0.0f)
-        {
-            // If active... (Run the disable once)
-            if (isActivated)
-            {
-                if (activationTick > 0.0f)
-                    activationTick -= Time.deltaTime;
-                else
-                {
-                    isActivated = false;
-                    hackCooldown = hackCooldownDuration;
-
-                    // (Sliding Door)
-                    //gameObject.GetComponent<Transform>().Translate(new Vector3(-1.0f, 0.0f, 0.0f));
-
-                    // (Rotating Door)
-                    isRot = true;
-                    rotateDir = -90;
-                }
-            }
-        }
     }
 
     public override bool Hack()
@@ -112,6 +98,23 @@ public class IoTDoor : IoTBaseObj
         selectionTick = 0.1f;
     }
 
+    public override void Disable()
+    {
+        base.Disable();
+
+        gameObject.GetComponent<AudioSource>().Play();
+        activationTick = 0.0f;
+        isActivated = false;
+        hackCooldown = hackCooldownDuration;
+
+        // (Sliding Door)
+        //gameObject.GetComponent<Transform>().Translate(new Vector3(-1.0f, 0.0f, 0.0f));
+
+        // (Rotating Door)
+        isRot = true;
+        rotateDir = -90;
+    }
+
     void RotateDoor()
     {
         if (isLid)
@@ -121,8 +124,8 @@ public class IoTDoor : IoTBaseObj
                 transform.Rotate(Vector3.up * -rotateDir * Time.deltaTime);
 
                 isRot = (rotateDir > 0) ?
-                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, defaultAxisRot + 90.0f)) <= 1.0f) :
-                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, defaultAxisRot)) <= 1.0f);
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, defaultAxisRot + 90.0f)) <= deltaOffset) :
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, defaultAxisRot)) <= deltaOffset);
             }
             else
             {
@@ -130,8 +133,8 @@ public class IoTDoor : IoTBaseObj
 
                 /// oh god this took me longer than I expected it to take
                 isRot = (rotateDir > 0) ?
-                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, (defaultAxisRot - 90.0f))) <= 1.0f) :
-                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, defaultAxisRot)) <= 1.0f);
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, (defaultAxisRot - 90.0f))) <= deltaOffset) :
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.x, defaultAxisRot)) <= deltaOffset);
             }
         }
         else
@@ -142,16 +145,16 @@ public class IoTDoor : IoTBaseObj
 
                 /// oh god this took me longer than I expected it to take
                 isRot = (rotateDir > 0) ?
-                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, (defaultAxisRot - 90.0f))) <= 1.0f) :
-                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, defaultAxisRot)) <= 1.0f);
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, (defaultAxisRot - 90.0f))) <= deltaOffset) :
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, defaultAxisRot)) <= deltaOffset);
             }
             else
             {
                 transform.Rotate(Vector3.up * rotateDir * Time.deltaTime);
 
                 isRot = (rotateDir > 0) ?
-                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, (defaultAxisRot + 90.0f))) <= 1.0f) :
-                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, defaultAxisRot)) <= 1.0f);
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, (defaultAxisRot + 90.0f))) <= deltaOffset) :
+                    !(Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, defaultAxisRot)) <= deltaOffset);
             }
         }
 
