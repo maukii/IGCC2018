@@ -74,15 +74,14 @@ public class TempPlayer : MonoBehaviour
             DEBUG_useKeyboard = true;
             useKeyboardInput = true;
         }
-        spawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
-        transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
 
         Debug.Log(SystemInfo.supportsGyroscope ? "Supports gyroscope" : "No gyroscope support");
     }
 
     private void OnLevelWasLoaded(int level)
     {
-        spawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
+        GameObject[] spawnArray = GameObject.FindGameObjectsWithTag("Respawn");
+        spawnPoint = spawnArray[0].transform;
         transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
     }
 
@@ -276,15 +275,17 @@ public class TempPlayer : MonoBehaviour
             //    return;
 
             other.GetComponentInParent<CandyPot>().Loot(this);
-            
-            if(other.GetComponentInParent<CandyPot>().remaindingCandy > 0)
-                anim.SetTrigger("Loot");
+<<<<<<< HEAD
 
-            if (candyPoints >= candyRequirement)            
+            if (candyPoints >= candyRequirement)
             {
                 // blast confetti or something
                 // TODO: WIN
             }
+=======
+            if(other.GetComponentInParent<CandyPot>().remaindingCandy > 0)
+                anim.SetTrigger("Loot");
+>>>>>>> fa08020aaadfa2a3713804da3f0561ec4ce08e51
         }
     }
 
@@ -411,15 +412,5 @@ public class TempPlayer : MonoBehaviour
     public int getLives()
     {
         return numLives;
-    }
-
-    public int getCandies()
-    {
-        return candyPoints;
-    }
-
-    public int getRequirement()
-    {
-        return candyRequirement;
     }
 }

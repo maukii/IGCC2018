@@ -16,7 +16,7 @@ public class DisplayLives : MonoBehaviour
     void Start ()
     {
         hpList.Add(hpIcon);
-        float offset = 110.0f;
+        float offset = 70.0f;
 
         for (int i = 1; i < player.getLives(); ++i)
         {
