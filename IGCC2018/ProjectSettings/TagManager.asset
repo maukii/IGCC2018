@@ -9,6 +9,8 @@ TagManager:
   - Candy
   - Door
   - Wall
+  - Ghost
+  - AI_Points
   layers:
   - Default
   - TransparentFX

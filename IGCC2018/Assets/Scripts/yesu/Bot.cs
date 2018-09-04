@@ -43,6 +43,9 @@ public class Bot : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
 
         _isChasing = false;
+
+        if (_target == null)
+            _target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Use this for initialization
