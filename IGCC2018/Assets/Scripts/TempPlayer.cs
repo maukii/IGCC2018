@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TempPlayer : MonoBehaviour
 {
-    public bool dead { get; set; }
+    public static bool playerIsDead;
     float gravity = -12;
 
     private int candyPoints = 0;
@@ -21,6 +21,12 @@ public class TempPlayer : MonoBehaviour
 
     // Selected IoT to hack
     float selectedIndex = 0.0f;
+
+    // Player respawn/spawn location
+    Transform spawnPoint;
+
+    // player lives
+    int numLives = 3;
 
 
     public static bool useKeyboardInput;
@@ -65,9 +71,24 @@ public class TempPlayer : MonoBehaviour
             useKeyboardInput = true;
         }
 
+        GameObject[] spawnArray = GameObject.FindGameObjectsWithTag("Respawn");
+        spawnPoint = spawnArray[0].transform;
+
         Debug.Log(SystemInfo.supportsGyroscope ? "Supports gyroscope" : "No gyroscope support");
     }
 
+    //private void Awake()
+    //{
+    //    if (pInstance == null)
+    //    {
+    //        DontDestroyOnLoad(this);
+    //        pInstance = this;
+    //    }
+    //    else
+    //    {
+    //        DestroyObject(gameObject);
+    //    }
+    //}
 
     public Vector3 GetTilt()
     {
@@ -90,7 +111,7 @@ public class TempPlayer : MonoBehaviour
         selectIoT();
 
         // Hack the selected IoT, if possible
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (reachableIoT.Count > 0)
             {
@@ -113,10 +134,13 @@ public class TempPlayer : MonoBehaviour
 
     private void DoMovement()
     {
-        if (useKeyboardInput)
-            KeyboardMovement();
-        else
-            MobileMovement();
+        if(!playerIsDead)
+        {
+            if (useKeyboardInput)
+                KeyboardMovement();
+            else
+                MobileMovement();
+        }
     }
 
     private void UpdateAnimator()
@@ -216,6 +240,14 @@ public class TempPlayer : MonoBehaviour
         UpdateAnimator();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Ghost"))
+        {
+            print("u ded fam");
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("CandyPot") && Input.GetKey(KeyCode.F))
@@ -226,6 +258,8 @@ public class TempPlayer : MonoBehaviour
             //    return;
 
             other.GetComponentInParent<CandyPot>().Loot(this);
+            if(other.GetComponentInParent<CandyPot>().remaindingCandy > 0)
+                anim.SetTrigger("Loot");
         }
     }
 
