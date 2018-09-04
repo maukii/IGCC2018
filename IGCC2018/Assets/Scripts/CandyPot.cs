@@ -13,7 +13,7 @@ public class CandyPot : MonoBehaviour
     public int remaindingCandy = 0;
 
     // Duration needed to loot a single candy
-    float lootDuration = 1f;
+    [SerializeField] float lootDuration = 1f;
 
     // Reduce this one
     float lootTick = 0.0f;
