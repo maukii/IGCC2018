@@ -19,6 +19,12 @@ public class TempPlayer : MonoBehaviour
     // Selected IoT to hack
     float selectedIndex = 0.0f;
 
+    // Player respawn/spawn location
+    Transform spawnPoint;
+
+    // player lives
+    int numLives = 3;
+
 
     public static bool useKeyboardInput;
 
@@ -54,9 +60,24 @@ public class TempPlayer : MonoBehaviour
             useKeyboardInput = true;
         }
 
+        GameObject[] spawnArray = GameObject.FindGameObjectsWithTag("Respawn");
+        spawnPoint = spawnArray[0].transform;
+
         Debug.Log(SystemInfo.supportsGyroscope ? "Supports gyroscope" : "No gyroscope support");
     }
 
+    //private void Awake()
+    //{
+    //    if (pInstance == null)
+    //    {
+    //        DontDestroyOnLoad(this);
+    //        pInstance = this;
+    //    }
+    //    else
+    //    {
+    //        DestroyObject(gameObject);
+    //    }
+    //}
 
     public Vector3 GetTilt()
     {
@@ -143,6 +164,14 @@ public class TempPlayer : MonoBehaviour
                 currentSpeed = 0;
             }
             transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime * tilt.magnitude);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Ghost"))
+        {
+            print("u ded fam");
         }
     }
 
