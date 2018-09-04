@@ -31,6 +31,10 @@ public class IoTBaseObj : MonoBehaviour
     // initial material
     protected Material defaultMat = null;
 
+    // name/type of IoT
+    [SerializeField]
+    protected string objectType = null;
+
     // Use this for initialization
     virtual protected void Start()
     {
@@ -52,6 +56,19 @@ public class IoTBaseObj : MonoBehaviour
         else
         {
             canHack = true;
+        }
+
+        // Check if there is a activation duration
+        if (activationDuration > 0.0f)
+        {
+            // If active... (Run the disable once)
+            if (isActivated)
+            {
+                if (activationTick > 0.0f)
+                    activationTick -= Time.deltaTime;
+                else
+                    Disable();
+            }
         }
 
         if (selectionTick > 0.0f)
@@ -99,5 +116,19 @@ public class IoTBaseObj : MonoBehaviour
 
     virtual public void Selected()
     {
+    }
+
+    virtual public void Disable()
+    {
+    }
+
+    virtual public bool GetActivated()
+    {
+        return isActivated;
+    }
+
+    virtual public string GetIoTType()
+    {
+        return objectType;
     }
 }

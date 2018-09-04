@@ -8,6 +8,7 @@ TagManager:
   - IoT
   - Candy
   - Door
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Wall
   - 
   - 
   - 
