@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class TempPlayer : MonoBehaviour
 {
+    public bool dead { get; set; }
+    float gravity = -12;
+
     private int candyPoints = 0;
 
     // For raycasting the last object
@@ -28,22 +31,30 @@ public class TempPlayer : MonoBehaviour
     Gyroscope gyro;
 
     [Header("-- Variables --")]
-    [SerializeField] bool useDebug = false;
+    [SerializeField]
+    bool useDebug = false;
     [SerializeField] bool hacking = false;
     [SerializeField] bool isFlat = true;
 
     [SerializeField] float walkSpeed = 1f;
     [SerializeField] float wantedPhoneScreenAngle = 45f;
     [SerializeField] float minTiltRequired = 0.35f;
-    float currentSpeed;
+    public float currentSpeed;
+    public float velocityY;
 
     [HideInInspector] public Vector3 tilt;
 
+    Animator anim;
+    CharacterController cc;
+
     void Start()
     {
+        cc = GetComponent<CharacterController>();
+        anim = GetComponentInChildren<Animator>();
+
         gyro = Input.gyro;
 
-        if (SystemInfo.supportsGyroscope)
+        if (SystemInfo.supportsGyroscope && !DEBUG_useKeyboard)
         {
             Input.gyro.enabled = true;
             Screen.orientation = ScreenOrientation.LandscapeLeft;
@@ -64,14 +75,17 @@ public class TempPlayer : MonoBehaviour
     }
 
 
-    void Update ()
+    void Update()
     {
+        // actually more responsive if does movement before anything else O.o
+        DoMovement();
+
         // This turns the material of objects that are in the way of the camera viewing the player to translucent
-        hideObjects();
+        //hideObjects();
 
         // Detects for IoT objects within a sphere radius
         detectObjects();
-        
+
         // Player selects which IoT he wants to hack here
         selectIoT();
 
@@ -90,31 +104,71 @@ public class TempPlayer : MonoBehaviour
             }
         }
 
-        // By using simple move, manually placing gravity isnt needed.
-
-        if(useKeyboardInput)
-        {
-            //gameObject.GetComponent<CharacterController>().SimpleMove(new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical") * 400.0f * Time.deltaTime));
-            //gameObject.GetComponent<CharacterController>().SimpleMove(new Vector3((Input.GetAxis("Horizontal") * 400.0f * Time.deltaTime), 0.0f, 0.0f));
-
-            KeyboardMovement();
-        }
-        else
-        {
-            MobileMovement();
-        }
 
         if (useDebug)
         {
             Debug.DrawRay(transform.position + Vector3.up, tilt, Color.green);
         }
+    }
 
+    private void DoMovement()
+    {
+        if (useKeyboardInput)
+            KeyboardMovement();
+        else
+            MobileMovement();
+    }
+
+    private void UpdateAnimator()
+    {
+        float animSpeed;
+        animSpeed = currentSpeed;
+        animSpeed = Mathf.Clamp(animSpeed, 0, 1);
+        anim.SetFloat("speed", animSpeed);
     }
 
     private void KeyboardMovement()
     {
-        tilt = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-        transform.Translate(Vector3.forward * walkSpeed * Time.deltaTime * tilt.magnitude);
+        tilt = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
+
+        #region Acceleration calculations
+        
+        if (Mathf.Abs(tilt.magnitude) != 0)
+        {
+            if (currentSpeed <= walkSpeed)
+            {
+                currentSpeed += Time.deltaTime * walkSpeed;
+            }
+            else
+            {
+                currentSpeed = walkSpeed;
+            }
+        }
+        else
+        {
+            if (currentSpeed > 0)
+            {
+                currentSpeed -= Time.deltaTime * walkSpeed;
+            }
+            else
+            {
+                currentSpeed = 0f;
+            }
+        }
+        #endregion
+
+        velocityY += Time.deltaTime * gravity;
+        Vector3 velocity = transform.forward * currentSpeed + Vector3.up * velocityY;
+        cc.Move(velocity * Time.deltaTime);
+        currentSpeed = new Vector2(cc.velocity.x, cc.velocity.z).magnitude;
+
+        if (cc.isGrounded)
+        {
+            velocityY = 0f;
+        }
+
+        UpdateAnimator();
+
     }
 
     private void MobileMovement()
@@ -124,26 +178,42 @@ public class TempPlayer : MonoBehaviour
         if (isFlat)
             tilt = Quaternion.Euler(wantedPhoneScreenAngle, 0, 0) * tilt;
 
+        #region Acceleration calculations
         if (Mathf.Abs(tilt.y) > minTiltRequired || Mathf.Abs(tilt.x) > minTiltRequired - 0.15)
         {
             if (currentSpeed < walkSpeed)
             {
-                currentSpeed += Time.deltaTime;
+                currentSpeed += Time.deltaTime * walkSpeed;
             }
-            transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime * tilt.magnitude);
+            if (cc.isGrounded)
+            {
+                velocityY = 0f;
+            }
         }
         else
         {
             if (currentSpeed > 0)
             {
-                currentSpeed -= Time.deltaTime;
+                currentSpeed -= Time.deltaTime * walkSpeed;
             }
             else if (currentSpeed <= 0)
             {
                 currentSpeed = 0;
             }
-            transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime * tilt.magnitude);
         }
+        #endregion
+
+        velocityY += Time.deltaTime * gravity;
+        Vector3 velocity = transform.forward * currentSpeed + Vector3.up * velocityY;
+        cc.Move(velocity * Time.deltaTime);
+        currentSpeed = new Vector2(cc.velocity.x, cc.velocity.z).magnitude;
+
+        if (cc.isGrounded)
+        {
+            velocityY = 0f;
+        }
+
+        UpdateAnimator();
     }
 
     private void OnTriggerStay(Collider other)
