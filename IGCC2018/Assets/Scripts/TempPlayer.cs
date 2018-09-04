@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TempPlayer : MonoBehaviour
 {
-    public bool dead { get; set; }
+    public static bool playerIsDead;
     float gravity = -12;
 
     private int candyPoints = 0;
@@ -90,7 +90,7 @@ public class TempPlayer : MonoBehaviour
         selectIoT();
 
         // Hack the selected IoT, if possible
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (reachableIoT.Count > 0)
             {
@@ -113,10 +113,13 @@ public class TempPlayer : MonoBehaviour
 
     private void DoMovement()
     {
-        if (useKeyboardInput)
-            KeyboardMovement();
-        else
-            MobileMovement();
+        if(!playerIsDead)
+        {
+            if (useKeyboardInput)
+                KeyboardMovement();
+            else
+                MobileMovement();
+        }
     }
 
     private void UpdateAnimator()
@@ -226,6 +229,8 @@ public class TempPlayer : MonoBehaviour
             //    return;
 
             other.GetComponentInParent<CandyPot>().Loot(this);
+            if(other.GetComponentInParent<CandyPot>().remaindingCandy > 0)
+                anim.SetTrigger("Loot");
         }
     }
 

@@ -16,6 +16,8 @@ public class RotatePlayerModel : MonoBehaviour
     PlayerMovementGyro movementScript;
     TempPlayer tp;
 
+    [SerializeField] GameObject enemy;
+
     void Start()
     {
         movementScript = GetComponentInParent<PlayerMovementGyro>();
@@ -31,21 +33,30 @@ public class RotatePlayerModel : MonoBehaviour
 
     private void CalculatePlayerRotation()
     {
-        if (!tp.DEBUG_useKeyboard)
+        if(!TempPlayer.playerIsDead)
         {
-            if (Mathf.Abs(tilt.x) > minTiltRequired || Mathf.Abs(tilt.y) > minTiltRequired)
+            if (!tp.DEBUG_useKeyboard)
             {
-                Quaternion wantedRotation = Quaternion.Euler(transform.rotation.x, targetRotation, transform.rotation.z);
-                transform.rotation = Quaternion.Slerp(transform.rotation, wantedRotation, turnSmoothning * Time.deltaTime);
+                if (Mathf.Abs(tilt.x) > minTiltRequired || Mathf.Abs(tilt.y) > minTiltRequired)
+                {
+                    Quaternion wantedRotation = Quaternion.Euler(transform.rotation.x, targetRotation, transform.rotation.z);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, wantedRotation, turnSmoothning * Time.deltaTime);
+                }
+            }
+            else
+            {
+                if (tilt.magnitude != 0)
+                {
+                    Quaternion wantedRotation = Quaternion.Euler(transform.rotation.x, targetRotation, transform.rotation.z);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, wantedRotation, turnSmoothning * Time.deltaTime);
+                }
             }
         }
         else
         {
-            if (tilt.magnitude != 0)
-            {
-                Quaternion wantedRotation = Quaternion.Euler(transform.rotation.x, targetRotation, transform.rotation.z);
-                transform.rotation = Quaternion.Slerp(transform.rotation, wantedRotation, turnSmoothning * Time.deltaTime);
-            }
+            //Quaternion wantedRotation = Quaternion.Euler(transform.rotation.x, enemy.transform.rotation.y * -1, transform.rotation.z);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, wantedRotation, turnSmoothning * Time.deltaTime);
+            transform.LookAt(enemy.transform);
         }
     }
 
