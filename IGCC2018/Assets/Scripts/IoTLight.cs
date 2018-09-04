@@ -9,6 +9,12 @@ public class IoTLight : IoTBaseObj
     {
         base.Start();
 
+        // null check
+        if (objectType == null)
+        {
+            objectType = "Light";
+        }
+
         gameObject.GetComponent<Light>().intensity = 0.0f;
     }
 
@@ -16,23 +22,6 @@ public class IoTLight : IoTBaseObj
     protected override void Update()
     {
         base.Update();
-
-        // Check if there is a activation duration
-        if (activationDuration > 0.0f)
-        {
-            // If active... (Run the disable once)
-            if (isActivated)
-            {
-                if (activationTick > 0.0f)
-                    activationTick -= Time.deltaTime;
-                else
-                {
-                    isActivated = false;
-
-                    gameObject.GetComponent<Light>().intensity = 0.0f;
-                }
-            }
-        }
     }
 
     public override bool Hack()
@@ -62,5 +51,14 @@ public class IoTLight : IoTBaseObj
         base.Selected();
 
         selectionTick = 0.1f;
+    }
+
+    public override void Disable()
+    {
+        base.Disable();
+
+        isActivated = false;
+
+        gameObject.GetComponent<Light>().intensity = 0.0f;
     }
 }
