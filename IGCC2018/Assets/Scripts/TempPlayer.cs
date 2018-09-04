@@ -28,6 +28,10 @@ public class TempPlayer : MonoBehaviour
     // player lives
     int numLives = 3;
 
+    // Total candy needed
+    [SerializeField]
+    int candyRequirement = 40;
+
 
     public static bool useKeyboardInput;
 
@@ -71,10 +75,14 @@ public class TempPlayer : MonoBehaviour
             useKeyboardInput = true;
         }
 
+        Debug.Log(SystemInfo.supportsGyroscope ? "Supports gyroscope" : "No gyroscope support");
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
         GameObject[] spawnArray = GameObject.FindGameObjectsWithTag("Respawn");
         spawnPoint = spawnArray[0].transform;
-
-        Debug.Log(SystemInfo.supportsGyroscope ? "Supports gyroscope" : "No gyroscope support");
+        transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
     }
 
     //private void Awake()
@@ -241,7 +249,16 @@ public class TempPlayer : MonoBehaviour
     {
         if (other.CompareTag("Ghost"))
         {
-            print("u ded fam");
+            --numLives;
+
+            if (numLives <= 0)
+            {
+                // dead screen or something??
+                // TODO: load to main menu/death screen
+                print("Actually dead");
+            }
+
+            Respawn();
         }
     }
 
@@ -255,6 +272,12 @@ public class TempPlayer : MonoBehaviour
             //    return;
 
             other.GetComponentInParent<CandyPot>().Loot(this);
+
+            if (candyPoints >= candyRequirement)
+            {
+                // blast confetti or something
+                // TODO: WIN
+            }
         }
     }
 
@@ -370,5 +393,16 @@ public class TempPlayer : MonoBehaviour
             return "Nothing Selected";
 
         return reachableIoT[Mathf.FloorToInt(selectedIndex)].gameObject.name;
+    }
+
+    void Respawn()
+    {
+        // Set respawn point
+        transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+    }
+
+    public int getLives()
+    {
+        return numLives;
     }
 }

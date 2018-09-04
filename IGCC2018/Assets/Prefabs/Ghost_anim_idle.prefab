@@ -489,9 +489,10 @@ GameObject:
   - component: {fileID: 114162863439462232}
   - component: {fileID: 195521690270921940}
   - component: {fileID: 114010501768953010}
+  - component: {fileID: 135309115675182376}
   m_Layer: 0
   m_Name: Ghost_anim_idle
-  m_TagString: Untagged
+  m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -561,7 +562,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1893047205677868}
   m_LocalRotation: {x: -0, y: -0.8950371, z: -0, w: 0.4459918}
-  m_LocalPosition: {x: 10.44, y: 0.054, z: -12.42}
+  m_LocalPosition: {x: 27.23, y: 0, z: -10.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4247325852516928}
@@ -1015,6 +1016,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b1697cf112fc0409a666ceba9156b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &135309115675182376
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1893047205677868}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!137 &137947139629350846
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

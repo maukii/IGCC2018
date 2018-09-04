@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class ConstantObject : MonoBehaviour
 {
-	// Use this for initialization
-	void Start ()
+    private void Awake()
     {
         DontDestroyOnLoad(this);
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
+    }
 }
