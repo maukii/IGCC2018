@@ -30,6 +30,8 @@ public class Chase : BotState
         NavMeshAgent agent = bot.Agent;
         agent.destination = _target.position;
 
+
+        // Open the door the bot found during tracking the player
         SearchDoor(agent);
 
         //if (_iotTrget)
@@ -51,7 +53,7 @@ public class Chase : BotState
         Ray ray = new Ray(rayPos, agent.transform.up * -1);
 
         // ray casting to around Objects
-        RaycastHit[] hitinfos = Physics.SphereCastAll(ray, _detectingRange/2);
+        RaycastHit[] hitinfos = Physics.SphereCastAll(ray, _detectingRange/4);
 
         // if detect hackable object change target
         foreach (var hitinfo in hitinfos)
@@ -62,14 +64,9 @@ public class Chase : BotState
 
             if (_iotTrget != null && _iotTrget.GetActivated())
             {
-                Debug.Log("SearchDoor");
-
-
                 // Check the type of the IoT.
                 if (_iotTrget.GetIoTType() == "Door")
                 {
-
-
                     _iotTrget.Disable();
                 }
             }

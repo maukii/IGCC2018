@@ -15,7 +15,7 @@ public class Bot : MonoBehaviour
     private Transform _target;
     // search hackable object ray diameter
     [SerializeField]
-    private float _detectingRange = 2;
+    private float _detectingRange = 5;
 
     private NavMeshAgent _agent;
 
@@ -79,6 +79,16 @@ public class Bot : MonoBehaviour
         _currentState.Execute(this);
 
         SearchPlayer();
+
+        if (IsChasing && !TempPlayer.playerIsDead)
+        {
+            AudioManager.instance.RiseTempo("Music");
+        }
+        else
+        {
+            if (!TempPlayer.playerIsDead)
+                AudioManager.instance.LowerTempo("Music");
+        }
     }
 
     private void SearchPlayer()

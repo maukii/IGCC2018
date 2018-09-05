@@ -11,6 +11,7 @@ TagManager:
   - Wall
   - Ghost
   - AI_Points
+  - Constant
   layers:
   - Default
   - TransparentFX

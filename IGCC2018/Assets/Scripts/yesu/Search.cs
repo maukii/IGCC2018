@@ -25,4 +25,10 @@ public class Search : BotState
 
     }
 
+    public void hoge()
+    {
+        GameObject go;
+
+    }
+
 }
