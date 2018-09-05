@@ -3068,7 +3068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afaee5922fe6b0e42ac0fd8e1e906136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: LevelTwo
+  nextLevel: WinScreen
   noCollide: 0
   delay: 10
   isActive: 0

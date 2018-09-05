@@ -1488,7 +1488,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -62.30002, y: 39.199997}
+  m_AnchoredPosition: {x: -62.30005, y: 39.199997}
   m_SizeDelta: {x: 224.59998, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1211985016
@@ -1702,7 +1702,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -66.00003, y: 1.199997}
+  m_AnchoredPosition: {x: -66, y: 1.2000122}
   m_SizeDelta: {x: 164, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1354815690
@@ -2036,7 +2036,6 @@ GameObject:
   - component: {fileID: 1606733130}
   - component: {fileID: 1606733129}
   - component: {fileID: 1606733128}
-  - component: {fileID: 1606733127}
   - component: {fileID: 1606733131}
   m_Layer: 0
   m_Name: Main Camera
@@ -2045,13 +2044,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1606733127
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1606733126}
-  m_Enabled: 1
 --- !u!124 &1606733128
 Behaviour:
   m_ObjectHideFlags: 0

@@ -32,6 +32,11 @@ public class TempPlayer : MonoBehaviour
     [SerializeField]
     int candyRequirement = 40;
 
+    // Invulnerability on respawn
+    float invulnDuration = 3.0f;
+
+    float invulnTick = 3.0f;
+
 
     public static bool useKeyboardInput;
 
@@ -59,6 +64,8 @@ public class TempPlayer : MonoBehaviour
 
     void Start()
     {
+        playerIsDead = false;
+
         cc = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
 
@@ -136,6 +143,9 @@ public class TempPlayer : MonoBehaviour
                 //    obj.GetComponent<IoTBaseObj>().Hack();
             }
         }
+
+        if (invulnTick > 0.0f)
+            invulnTick -= Time.deltaTime;
 
 
         if (useDebug)
@@ -256,13 +266,16 @@ public class TempPlayer : MonoBehaviour
     {
         if (other.CompareTag("Ghost"))
         {
+            if (invulnTick > 0.0f)
+                return;
+
             --numLives;
 
             if (numLives <= 0)
             {
                 // dead screen or something??
-                // TODO: load to main menu/death screen
-                print("Actually dead");
+                playerIsDead = true;
+                UnityEngine.SceneManagement.SceneManager.LoadScene("DeathScreen");
             }
 
             Respawn();
@@ -271,6 +284,23 @@ public class TempPlayer : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if (other.CompareTag("Ghost"))
+        {
+            if (invulnTick > 0.0f)
+                return;
+
+            --numLives;
+
+            if (numLives <= 0)
+            {
+                // dead screen or something??
+                playerIsDead = true;
+                UnityEngine.SceneManagement.SceneManager.LoadScene("DeathScreen");
+            }
+
+            Respawn();
+        }
+
         if (other.CompareTag("CandyPot") && Input.GetKey(KeyCode.F))
         {
             //float distance = other.ClosestPoint(transform.position).magnitude;
@@ -403,6 +433,8 @@ public class TempPlayer : MonoBehaviour
 
     void Respawn()
     {
+        invulnTick = invulnDuration;
+
         // Set respawn point
         transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
     }
@@ -422,6 +454,7 @@ public class TempPlayer : MonoBehaviour
         return candyRequirement;
     }
 
+    // this... isnt used at all
     private void Reset()
     {
         // Total candies
@@ -438,5 +471,7 @@ public class TempPlayer : MonoBehaviour
 
         spawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
         transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+
+        playerIsDead = false;
     }
 }

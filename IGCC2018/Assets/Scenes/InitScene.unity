@@ -346,7 +346,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextLevel: HackableObjects
   noCollide: 1
-  delay: 0.5
+  delay: 0
+  isActive: 1
 --- !u!1001 &1301923408
 Prefab:
   m_ObjectHideFlags: 0
@@ -385,10 +386,6 @@ Prefab:
     - target: {fileID: 4969380441612056, guid: 290310dbbb8f58b449eb6a077456fa2b, type: 2}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1229306025859452, guid: 290310dbbb8f58b449eb6a077456fa2b, type: 2}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 290310dbbb8f58b449eb6a077456fa2b, type: 2}

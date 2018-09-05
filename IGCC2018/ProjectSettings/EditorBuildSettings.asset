@@ -9,11 +9,20 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 309b2debb8f30b64891948d33dd92406
   - enabled: 1
+    path: Assets/Scenes/InitScene.unity
+    guid: 37a4709d5ebe7bc40bfb217eeafe5a94
+  - enabled: 1
     path: Assets/Scenes/HackableObjects.unity
     guid: f1351494cc14d9a43a241547bd0b52d6
   - enabled: 1
-    path: Assets/Scenes/PlayerControls.unity
-    guid: 101e541adb123ea46a5b6d76922f7a26
-  - enabled: 1
     path: Assets/Scenes/LevelTwo.unity
     guid: 5d3201f374698984a9e6cc0799512cb5
+  - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: 1c77712bce8268c45aa2a77f2b66da04
+  - enabled: 1
+    path: Assets/Scenes/DeathScreen.unity
+    guid: 6ef6e2c0147304c4598ce0ef73c1fc1c
+  - enabled: 1
+    path: Assets/Scenes/PlayerControls.unity
+    guid: 101e541adb123ea46a5b6d76922f7a26
