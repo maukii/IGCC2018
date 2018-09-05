@@ -14,14 +14,14 @@ public class LevelTransition : MonoBehaviour
     [SerializeField]
     float delay = 10.0f;
 
-	// Use this for initialization
-	void Start ()
-    {
-	}
+    public bool isActive = true;
 	
 	// Update is called once per frame
 	void Update ()
     {
+        if (!isActive)
+            return;
+
 		if (noCollide)
         {
             delay -= Time.deltaTime;
@@ -35,7 +35,8 @@ public class LevelTransition : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print(other);
+        if (!isActive)
+            return;
 
         if (other.CompareTag("Player"))
         {

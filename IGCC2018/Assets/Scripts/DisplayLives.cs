@@ -20,8 +20,6 @@ public class DisplayLives : MonoBehaviour
 
         for (int i = 1; i < player.getLives(); ++i)
         {
-            print("loop");
-
             UnityEngine.UI.Image dupe = GameObject.Instantiate(hpIcon, transform);
 
             dupe.transform.Translate(new Vector3(offset, 0.0f, 0.0f));
