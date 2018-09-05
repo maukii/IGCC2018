@@ -27,7 +27,6 @@ public class Patrol : BotState
 
     IoTBaseObj _iotTrget = null;
 
-    private float _distanceToDistination = NEARBY_DISTANCE;
 
     // Execute patrolState
     public override void Execute(Bot bot)
@@ -35,7 +34,7 @@ public class Patrol : BotState
         NavMeshAgent agent = bot.Agent;
 
         //  set next position if agent arived at nearby to destination
-        if (!agent.pathPending && agent.remainingDistance < _distanceToDistination)
+        if (!agent.pathPending && agent.remainingDistance < NEARBY_DISTANCE)
         {
             if(_iotTrget)
                 _iotTrget.Disable();
@@ -43,15 +42,13 @@ public class Patrol : BotState
             _oldLight = _lightingTarget;
             _oldHackable = _hackableTarget;
             _lightingTarget = null;
-            _hackableTarget = null;
             GotoNextPoint(agent);
         }
 
         // detecting
         if (!_lightingTarget)
         {
-            if(!_hackableTarget)
-                SearchHackable(agent);
+            SearchHackable(agent);
 
             SearchLightObject(agent);
         }

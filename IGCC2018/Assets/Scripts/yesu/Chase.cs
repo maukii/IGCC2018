@@ -51,7 +51,7 @@ public class Chase : BotState
         Ray ray = new Ray(rayPos, agent.transform.up * -1);
 
         // ray casting to around Objects
-        RaycastHit[] hitinfos = Physics.SphereCastAll(ray, _detectingRange/2);
+        RaycastHit[] hitinfos = Physics.SphereCastAll(ray, _detectingRange/4);
 
         // if detect hackable object change target
         foreach (var hitinfo in hitinfos)
