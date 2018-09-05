@@ -50,6 +50,7 @@ public class TempPlayer : MonoBehaviour
     bool useDebug = false;
     [SerializeField] bool hacking = false;
     [SerializeField] bool isFlat = true;
+    [SerializeField] bool closeCandy;
 
     [SerializeField] float walkSpeed = 1f;
     [SerializeField] float wantedPhoneScreenAngle = 45f;
@@ -61,6 +62,8 @@ public class TempPlayer : MonoBehaviour
 
     Animator anim;
     CharacterController cc;
+
+    GameObject candyPot;
 
     void Start()
     {
@@ -85,6 +88,8 @@ public class TempPlayer : MonoBehaviour
         transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
 
         Debug.Log(SystemInfo.supportsGyroscope ? "Supports gyroscope" : "No gyroscope support");
+
+        AudioManager.instance.PlaySound("Music");
     }
 
     private void OnLevelWasLoaded(int level)
@@ -92,19 +97,6 @@ public class TempPlayer : MonoBehaviour
         spawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
         transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
     }
-
-    //private void Awake()
-    //{
-    //    if (pInstance == null)
-    //    {
-    //        DontDestroyOnLoad(this);
-    //        pInstance = this;
-    //    }
-    //    else
-    //    {
-    //        DestroyObject(gameObject);
-    //    }
-    //}
 
     public Vector3 GetTilt()
     {
@@ -152,6 +144,49 @@ public class TempPlayer : MonoBehaviour
         {
             Debug.DrawRay(transform.position + Vector3.up, tilt, Color.green);
         }
+    }
+
+    public void Action()
+    {
+        if (reachableIoT.Count > 0 && !closeCandy)
+        {
+            /// so many ifs oh god
+            if (gameObject.GetComponent<BatteryCharge>().CanHack(20.0f))
+            {
+                if (reachableIoT[Mathf.FloorToInt(selectedIndex)].GetComponent<IoTBaseObj>().Hack())
+                {
+                    gameObject.GetComponent<BatteryCharge>().DrainBattery(20.0f);
+                    anim.SetTrigger("Hack");
+                }
+            }
+        }
+
+        if (closeCandy && candyPot != null)
+        {
+            candyPot.GetComponent<CandyPot>().Loot(this);
+        }
+    }
+
+    public void NextHackable()
+    {
+        if (reachableIoT.Count <= 0)
+        {
+            return;
+        }
+
+        ++selectedIndex;
+        selectedIndex = Mathf.Repeat(selectedIndex, reachableIoT.Count);
+    }
+
+    public void PreviousHackable()
+    {
+        if (reachableIoT.Count <= 0)
+        {
+            return;
+        }
+
+        --selectedIndex;
+        selectedIndex = Mathf.Repeat(selectedIndex, reachableIoT.Count);
     }
 
     private void DoMovement()
@@ -262,6 +297,42 @@ public class TempPlayer : MonoBehaviour
         UpdateAnimator();
     }
 
+    public void Die()
+    {
+        Debug.Log("player die");
+        anim.SetTrigger("Die");
+        anim.SetBool("dead", true);
+        StartCoroutine(DieLoop());
+    }
+
+    private IEnumerator DieLoop()
+    {
+
+        --numLives;
+
+        if (numLives > 0)
+        {
+            AudioManager.instance.PlaySound("Howl");
+            AudioManager.instance.PlaySound("Scream");
+        }
+        else
+        {
+            AudioManager.instance.PlaySound("ScreamLong");
+        }
+
+        yield return new WaitForSeconds(2);
+
+        if (numLives <= 0)
+        {
+            // dead screen or something??
+            // TODO: load to main menu/death screen
+            AudioManager.instance.StopSound("Music");
+            print("Actually dead");
+        }
+
+        Respawn();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Ghost"))
@@ -318,6 +389,15 @@ public class TempPlayer : MonoBehaviour
                 // blast confetti or something
                 // TODO: WIN
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("CandyPot"))
+        {
+            closeCandy = false;
+            candyPot = null;
         }
     }
 
@@ -431,7 +511,7 @@ public class TempPlayer : MonoBehaviour
         return reachableIoT[Mathf.FloorToInt(selectedIndex)].gameObject.name;
     }
 
-    void Respawn()
+    public void Respawn()
     {
         invulnTick = invulnDuration;
 

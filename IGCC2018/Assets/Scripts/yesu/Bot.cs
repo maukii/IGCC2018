@@ -79,6 +79,15 @@ public class Bot : MonoBehaviour
         _currentState.Execute(this);
 
         SearchPlayer();
+
+        if(IsChasing)
+        {
+            AudioManager.instance.RiseTempo("Music");
+        }
+        else
+        {
+            AudioManager.instance.LowerTempo("Music");
+        }
     }
 
     private void SearchPlayer()
