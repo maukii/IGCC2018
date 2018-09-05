@@ -10,12 +10,15 @@ public class BuildNavMesh : SingletonMonoBehaviour<BuildNavMesh> {
     public NavMeshSurface GetSurface()
     {
         return GetComponent<NavMeshSurface>();
+    }   
+
+    void Awake()
+    {
+        GetComponent<NavMeshSurface>().BuildNavMesh();
     }
 
     // Use this for initialization
     void Start () {
         GetComponent<NavMeshSurface>().BuildNavMesh();
     }
-
-
 }

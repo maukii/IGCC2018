@@ -15,7 +15,7 @@ public class Bot : MonoBehaviour
     private Transform _target;
     // search hackable object ray diameter
     [SerializeField]
-    private float _detectingRange = 2;
+    private float _detectingRange = 5;
 
     private NavMeshAgent _agent;
 

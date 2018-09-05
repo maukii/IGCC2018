@@ -30,6 +30,8 @@ public class Chase : BotState
         NavMeshAgent agent = bot.Agent;
         agent.destination = _target.position;
 
+
+        // Open the door the bot found during tracking the player
         SearchDoor(agent);
 
         //if (_iotTrget)
@@ -62,14 +64,9 @@ public class Chase : BotState
 
             if (_iotTrget != null && _iotTrget.GetActivated())
             {
-                Debug.Log("SearchDoor");
-
-
                 // Check the type of the IoT.
                 if (_iotTrget.GetIoTType() == "Door")
                 {
-
-
                     _iotTrget.Disable();
                 }
             }
