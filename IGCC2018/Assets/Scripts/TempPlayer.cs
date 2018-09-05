@@ -2,10 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TempPlayer : MonoBehaviour
 {
     public static bool playerIsDead;
+    Animator anim;
+    CharacterController cc;
+
+
+    #region Other variables
+
     float gravity = -12;
 
     private int candyPoints = 0;
@@ -37,43 +44,49 @@ public class TempPlayer : MonoBehaviour
 
     float invulnTick = 3.0f;
 
+    #endregion
+
+    #region Player variables
 
     public static bool useKeyboardInput;
+    Gyroscope gyro;
 
     [Header("Use if no device connected")]
     public bool DEBUG_useKeyboard;
 
-    Gyroscope gyro;
-
     [Header("-- Variables --")]
-    [SerializeField]
-    bool useDebug = false;
-    [SerializeField] bool hacking = false;
+    [SerializeField] bool useDebug = false;
     [SerializeField] bool isFlat = true;
-    [SerializeField] bool closeCandy;
+    bool hacking = false;
+    public bool closeCandy;
 
     [SerializeField] float walkSpeed = 1f;
     [SerializeField] float wantedPhoneScreenAngle = 45f;
     [SerializeField] float minTiltRequired = 0.35f;
-    public float currentSpeed;
-    public float velocityY;
+    float currentSpeed;
+    float velocityY;
 
     [HideInInspector] public Vector3 tilt;
 
-    Animator anim;
-    CharacterController cc;
+    public GameObject candyPot;
 
-    GameObject candyPot;
+    #endregion
+
+    [SerializeField] Sprite[] actionSprites = new Sprite[2];
+    [SerializeField] Image activeImage;
+
+    private void OnEnable()
+    {
+        playerIsDead = false;
+    }
 
     void Start()
     {
-        playerIsDead = false;
-
         cc = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
 
-        gyro = Input.gyro;
 
+        gyro = Input.gyro;
         if (SystemInfo.supportsGyroscope && !DEBUG_useKeyboard)
         {
             Input.gyro.enabled = true;
@@ -84,42 +97,41 @@ public class TempPlayer : MonoBehaviour
             DEBUG_useKeyboard = true;
             useKeyboardInput = true;
         }
+
+
         spawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
         transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
 
-        Debug.Log(SystemInfo.supportsGyroscope ? "Supports gyroscope" : "No gyroscope support");
 
-        AudioManager.instance.PlaySound("Music");
+        Debug.Log(SystemInfo.supportsGyroscope ? "Supports gyroscope" : "No gyroscope support");
+        activeImage.sprite = actionSprites[0];
     }
 
     private void OnLevelWasLoaded(int level)
     {
         spawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
         transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
-    }
-
-    public Vector3 GetTilt()
-    {
-        return tilt;
-    }
-
+    } // this is absolite
 
     void Update()
     {
         // actually more responsive if does movement before anything else O.o
-        DoMovement();
+        if(!playerIsDead)
+        {
+            DoMovement();
+            UpdateUI();
 
-        // This turns the material of objects that are in the way of the camera viewing the player to translucent
-        //hideObjects();
+            // This turns the material of objects that are in the way of the camera viewing the player to translucent
+            //hideObjects();
 
-        // Detects for IoT objects within a sphere radius
-        detectObjects();
+            // Detects for IoT objects within a sphere radius
+            detectObjects();
 
-        // Player selects which IoT he wants to hack here
-        selectIoT();
+            // Player selects which IoT he wants to hack here
+            selectIoT();
 
-        // Hack the selected IoT, if possible
-        if (Input.GetKeyDown(KeyCode.Space))
+            // Hack the selected IoT, if possible
+            if (Input.GetKeyDown(KeyCode.Space))
         {
             if (reachableIoT.Count > 0)
             {
@@ -136,13 +148,26 @@ public class TempPlayer : MonoBehaviour
             }
         }
 
-        if (invulnTick > 0.0f)
-            invulnTick -= Time.deltaTime;
-
+            if (invulnTick > 0.0f)
+                invulnTick -= Time.deltaTime;
+        }
 
         if (useDebug)
         {
             Debug.DrawRay(transform.position + Vector3.up, tilt, Color.green);
+        }
+    }
+
+    private void UpdateUI()
+    {
+        if(closeCandy && candyPot.GetComponent<CandyPot>().remaindingCandy > 0)
+        {
+            Debug.Log("cady");
+            activeImage.sprite = actionSprites[1];
+        }
+        else
+        {
+            activeImage.sprite = actionSprites[0]; 
         }
     }
 
@@ -307,7 +332,6 @@ public class TempPlayer : MonoBehaviour
 
     private IEnumerator DieLoop()
     {
-
         --numLives;
 
         if (numLives > 0)
@@ -317,7 +341,7 @@ public class TempPlayer : MonoBehaviour
         }
         else
         {
-            AudioManager.instance.PlaySound("ScreamLong");
+            AudioManager.instance.PlaySound("ScreamLong"); // mby don't use this
         }
 
         yield return new WaitForSeconds(2);
@@ -328,29 +352,38 @@ public class TempPlayer : MonoBehaviour
             // TODO: load to main menu/death screen
             AudioManager.instance.StopSound("Music");
             print("Actually dead");
+            LevelChanger.instance.FadeToLevel(5);
         }
-
-        Respawn();
+        else
+        {
+            Respawn();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Ghost"))
+        if (other.CompareTag("CandyPot"))
         {
-            if (invulnTick > 0.0f)
-                return;
-
-            --numLives;
-
-            if (numLives <= 0)
-            {
-                // dead screen or something??
-                playerIsDead = true;
-                UnityEngine.SceneManagement.SceneManager.LoadScene("DeathScreen");
-            }
-
-            Respawn();
+            closeCandy = true;
+            candyPot = other.gameObject;
         }
+
+        //if (other.CompareTag("Ghost"))
+        //{
+        //    if (invulnTick > 0.0f)
+        //        return;
+        //
+        //    --numLives;
+        //
+        //    if (numLives <= 0)
+        //    {
+        //        // dead screen or something??
+        //        playerIsDead = true;
+        //        UnityEngine.SceneManagement.SceneManager.LoadScene("DeathScreen");
+        //    }
+        //
+        //    Respawn();
+        //}
     }
 
     private void OnTriggerStay(Collider other)
@@ -516,7 +549,12 @@ public class TempPlayer : MonoBehaviour
         invulnTick = invulnDuration;
 
         // Set respawn point
+        //transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+
+        anim.SetBool("dead", false);
+        playerIsDead = false;
         transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+        GameObject.Find("Enemy").GetComponentInChildren<EnemyKillPlayer>().Respawn();
     }
 
     public int getLives()
@@ -532,6 +570,11 @@ public class TempPlayer : MonoBehaviour
     public int getRequirement()
     {
         return candyRequirement;
+    }
+
+    public Vector3 GetTilt()
+    {
+        return tilt;
     }
 
     // this... isnt used at all
