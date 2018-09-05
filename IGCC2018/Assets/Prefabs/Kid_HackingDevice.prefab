@@ -51,13 +51,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1767924321661226}
-  m_LocalRotation: {x: -0.70710677, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.297, z: 0.0029}
+  m_LocalRotation: {x: -0.00000014901156, y: -0.00000014901156, z: -0.00000014901156,
+    w: 1}
+  m_LocalPosition: {x: -0, y: -0, z: 0.002809}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4831358534738378}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4831358534738378
 Transform:
   m_ObjectHideFlags: 1
@@ -65,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1516618763030630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8600352, y: 1.4013369, z: 4.681}
+  m_LocalPosition: {x: 0.00082, y: 0.00085, z: -0.00093}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4254698446427624}
@@ -86,6 +87,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: d51b16ecc802fe0439a82b4b86c5b541, type: 2}
+  - {fileID: 2100000, guid: 2275c6ab3e83e104584bf6c81f5adf8b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -168,14 +170,14 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1831202171
+  randomSeed: 780057895
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.59
+      scalar: 0.75
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -320,7 +322,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -818,15 +820,21 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 2
           time: 0
-          value: 1
-          inSlope: -1
-          outSlope: -1
+          value: 0.50753784
+          inSlope: -0.3768857
+          outSlope: -0.3768857
+          tangentMode: 0
+        - serializedVersion: 2
+          time: 0.7142372
+          value: 0.12562561
+          inSlope: -1.2374378
+          outSlope: -1.2374378
           tangentMode: 0
         - serializedVersion: 2
           time: 1
-          value: 0
-          inSlope: -1
-          outSlope: -1
+          value: 1
+          inSlope: 4.079213
+          outSlope: 4.079213
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
