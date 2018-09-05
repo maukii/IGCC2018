@@ -17,10 +17,16 @@ public class Bot : MonoBehaviour
     [SerializeField]
     private float _detectingRange = 2;
 
-    // navmesh agent
     private NavMeshAgent _agent;
 
     private bool _isChasing;
+    public bool IsChasing
+    {
+        get
+        {
+            return _isChasing;
+        }
+    }
 
     // debug text 
     [SerializeField]
@@ -51,14 +57,18 @@ public class Bot : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        if (!_target)
+            GameObject.Find("Player");
+        
+
         // Initialize each State
         _patrolState.Init(_patrolingPoints, _detectingRange);
-        _chaseState.SetTarget(_target);
+        _chaseState.Init(_target,_detectingRange);
 
         ChangeState(_patrolState);
 
         // agent won't be stop
-        _agent.autoBraking = false;
+         _agent.autoBraking = false;
 
         StartCoroutine("LostPlayer");
     }
@@ -95,7 +105,7 @@ public class Bot : MonoBehaviour
     }
 
     // On lost player 3secons continue chase
-    IEnumerator LostPlayer()
+    public IEnumerator LostPlayer()
     {
         yield return new WaitForSeconds(3.0f);
 
