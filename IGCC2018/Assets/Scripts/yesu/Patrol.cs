@@ -9,7 +9,7 @@ public class Patrol : BotState
 {
     private const int RAY_HEIGHT = 5;
     private const float LIGHT_DETECT_DISTANCE = 6.0f;
-    private const float NEARBY_DISTANCE = 0.5f;
+    private const float NEARBY_DISTANCE = 0.2f;
 
     // array of patrolling points
     private Transform[] points;
@@ -25,6 +25,8 @@ public class Patrol : BotState
     GameObject _oldHackable = null;
     GameObject _oldLight = null;
 
+    IoTBaseObj _iotTrget = null;
+
     private float _distanceToDistination = NEARBY_DISTANCE;
 
     // Execute patrolState
@@ -35,16 +37,21 @@ public class Patrol : BotState
         //  set next position if agent arived at nearby to destination
         if (!agent.pathPending && agent.remainingDistance < _distanceToDistination)
         {
+            if(_iotTrget)
+                _iotTrget.Disable();
+
             _oldLight = _lightingTarget;
             _oldHackable = _hackableTarget;
             _lightingTarget = null;
+            _hackableTarget = null;
             GotoNextPoint(agent);
         }
 
         // detecting
         if (!_lightingTarget)
         {
-            SearchHackable(agent);
+            if(!_hackableTarget)
+                SearchHackable(agent);
 
             SearchLightObject(agent);
         }
@@ -163,22 +170,19 @@ public class Patrol : BotState
     // Assume this is the IoT target or something
     bool FindIoT(GameObject target)
     {
-        IoTBaseObj iot = target.GetComponent<IoTBaseObj>();
+        _iotTrget = target.GetComponent<IoTBaseObj>();
 
         // TRUE = its on
-        if (iot!= null&& iot.GetActivated())
+        if (_iotTrget!= null && _iotTrget.GetActivated())
         {
             // Check the type of the IoT.
             switch (target.GetComponent<IoTBaseObj>().GetIoTType())
             {
                 case "Door":
-                    target.GetComponent<IoTBaseObj>().Disable();
-                    return true;
+                     return true;
                 case "Audio":
-                    target.GetComponent<IoTBaseObj>().Disable();
                     return true;
                 case "Light":
-                    target.GetComponent<IoTBaseObj>().Disable();
                     return true;
 
                 default:
