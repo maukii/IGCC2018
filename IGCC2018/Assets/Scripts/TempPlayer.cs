@@ -127,7 +127,10 @@ public class TempPlayer : MonoBehaviour
                 /// so many ifs oh god
                 if (gameObject.GetComponent<BatteryCharge>().CanHack(20.0f))
                     if (reachableIoT[Mathf.FloorToInt(selectedIndex)].GetComponent<IoTBaseObj>().Hack())
+                    {
                         gameObject.GetComponent<BatteryCharge>().DrainBattery(20.0f);
+                        anim.SetTrigger("Hack");
+                    }
 
                 //foreach (GameObject obj in reachableIoT)
                 //    obj.GetComponent<IoTBaseObj>().Hack();
