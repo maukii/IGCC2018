@@ -80,13 +80,14 @@ public class Bot : MonoBehaviour
 
         SearchPlayer();
 
-        if(IsChasing)
+        if (IsChasing && !TempPlayer.playerIsDead)
         {
             AudioManager.instance.RiseTempo("Music");
         }
         else
         {
-            AudioManager.instance.LowerTempo("Music");
+            if (!TempPlayer.playerIsDead)
+                AudioManager.instance.LowerTempo("Music");
         }
     }
 
