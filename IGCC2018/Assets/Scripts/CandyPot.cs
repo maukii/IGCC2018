@@ -28,6 +28,14 @@ public class CandyPot : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        if (remaindingCandy == 0)
+        {
+            if (gameObject.GetComponent<AudioSource>())
+                gameObject.GetComponent<AudioSource>().Stop();
+
+            if (gameObject.GetComponentInChildren<ParticleSystem>())
+                gameObject.GetComponentInChildren<ParticleSystem>().Stop();
+        }
     }
 
     public void Loot(TempPlayer player)
@@ -45,6 +53,9 @@ public class CandyPot : MonoBehaviour
                 gameObject.GetComponent<AudioSource>().Play();
             else
                 print("No audio detected");
+
+            if (gameObject.GetComponentInChildren<ParticleSystem>())
+                gameObject.GetComponentInChildren<ParticleSystem>().Play();
 
             lootTick = lootDuration;
 

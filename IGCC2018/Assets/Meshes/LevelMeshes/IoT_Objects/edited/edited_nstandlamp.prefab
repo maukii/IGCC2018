@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4328232866837346}
   - component: {fileID: 108022519736038192}
   - component: {fileID: 65067708914381876}
+  - component: {fileID: 114854577950816112}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: IoT
@@ -159,3 +160,18 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114854577950816112
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1187542153309732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef21c6499d27dd40b6163f74fff9f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActivated: 0
+  hackCooldownDuration: 1
+  activationDuration: 10
+  objectType: 
