@@ -50,9 +50,6 @@ public class CandyPot : MonoBehaviour
 
             --remaindingCandy;
 
-            print("1 candy taken");
-            print(remaindingCandy + " candies are left");
-
             player.addCandyPoints(1);
         }
     }

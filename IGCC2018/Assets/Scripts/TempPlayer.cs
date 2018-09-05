@@ -294,9 +294,6 @@ public class TempPlayer : MonoBehaviour
     public void addCandyPoints(int points)
     {
         candyPoints += points;
-
-        print("Gained " + points + " candies");
-        print("Total of: " + candyPoints + " candies");
     }
 
     void hideObjects()
@@ -392,7 +389,6 @@ public class TempPlayer : MonoBehaviour
 
         //print(reachableIoT[Mathf.FloorToInt(selectedIndex)]);
 
-        // NOTE: delete this if check later.
         if (reachableIoT[Mathf.FloorToInt(selectedIndex)].GetComponent<IoTBaseObj>())
             reachableIoT[Mathf.FloorToInt(selectedIndex)].GetComponent<IoTBaseObj>().Selected();
     }
@@ -424,5 +420,23 @@ public class TempPlayer : MonoBehaviour
     public int getRequirement()
     {
         return candyRequirement;
+    }
+
+    private void Reset()
+    {
+        // Total candies
+        candyPoints = 0;
+
+        // For raycasting the last object
+        lastHitObject = null;
+
+        // Last object's material
+        lastObjectMaterial = null;
+
+        // player lives
+        numLives = 3;
+
+        spawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
+        transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
     }
 }
