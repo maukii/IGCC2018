@@ -43,9 +43,28 @@ public class CandyPot : MonoBehaviour
         if (remaindingCandy <= 0)
             return;
 
-        if (lootTick > 0.0f)
+        if (TempPlayer.useKeyboardInput)
         {
-            lootTick -= Time.deltaTime;
+            if (lootTick > 0.0f)
+            {
+                lootTick -= Time.deltaTime;
+            }
+            else
+            {
+                if (gameObject.GetComponent<AudioSource>())
+                    gameObject.GetComponent<AudioSource>().Play();
+                else
+                    print("No audio detected");
+
+                lootTick = lootDuration;
+
+                --remaindingCandy;
+
+                print("1 candy taken");
+                print(remaindingCandy + " candies are left");
+
+                player.addCandyPoints(1);
+            }
         }
         else
         {
@@ -54,12 +73,12 @@ public class CandyPot : MonoBehaviour
             else
                 print("No audio detected");
 
-            if (gameObject.GetComponentInChildren<ParticleSystem>())
-                gameObject.GetComponentInChildren<ParticleSystem>().Play();
-
             lootTick = lootDuration;
 
             --remaindingCandy;
+
+            print("1 candy taken");
+            print(remaindingCandy + " candies are left");
 
             player.addCandyPoints(1);
         }

@@ -3400,25 +3400,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 1801953652859274, guid: 24392db8101a2e14da3dd5c5e3441e1b, type: 2}
-      propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 143521033468332298, guid: 24392db8101a2e14da3dd5c5e3441e1b,
-        type: 2}
-      propertyPath: m_Radius
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 114622190676557372, guid: 24392db8101a2e14da3dd5c5e3441e1b,
         type: 2}
       propertyPath: enemy
       value: 
       objectReference: {fileID: 1301559974}
-    - target: {fileID: 108010898577449824, guid: 24392db8101a2e14da3dd5c5e3441e1b,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 24392db8101a2e14da3dd5c5e3441e1b, type: 2}
   m_IsPrefabParent: 0
@@ -7623,6 +7609,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextLevel: PlayerControls
+  noCollide: 0
+  delay: 10
 --- !u!65 &1932664122
 BoxCollider:
   m_ObjectHideFlags: 0
