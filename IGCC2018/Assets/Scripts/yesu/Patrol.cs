@@ -34,25 +34,31 @@ public class Patrol : BotState
         NavMeshAgent agent = bot.Agent;
 
         //  set next position if agent arived at nearby to destination
-        if (!agent.pathPending && agent.remainingDistance < NEARBY_DISTANCE)
+
+        if (agent.pathStatus != NavMeshPathStatus.PathInvalid)
         {
-            if(_iotTrget)
-                _iotTrget.Disable();
 
-            _oldLight = _lightingTarget;
-            _oldHackable = _hackableTarget;
-            _lightingTarget = null;
-            GotoNextPoint(agent);
+            if (!agent.pathPending && agent.remainingDistance < NEARBY_DISTANCE)
+            {
+                if (_iotTrget)
+                    _iotTrget.Disable();
+
+                _oldLight = _lightingTarget;
+                _oldHackable = _hackableTarget;
+                _lightingTarget = null;
+                GotoNextPoint(agent);
+            }
+
+            // detecting
+            if (!_lightingTarget)
+            {
+                SearchHackable(agent);
+
+                SearchLightObject(agent);
+            }
         }
+    } 
 
-        // detecting
-        if (!_lightingTarget)
-        {
-            SearchHackable(agent);
-
-            SearchLightObject(agent);
-        }
-    }
 
     // Initialize patrolState
     public void Init(GameObject patrolPoints, float detecingtrange)

@@ -54,9 +54,10 @@ public class RotatePlayerModel : MonoBehaviour
         }
         else
         {
-            //Quaternion wantedRotation = Quaternion.Euler(transform.rotation.x, enemy.transform.rotation.y * -1, transform.rotation.z);
-            //transform.rotation = Quaternion.Slerp(transform.rotation, wantedRotation, turnSmoothning * Time.deltaTime);
-            transform.LookAt(enemy.transform);
+            var lookPos = enemy.transform.position - transform.position;
+            lookPos.y = 0;
+            var rotation = Quaternion.LookRotation(lookPos);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * turnSmoothning);
         }
     }
 

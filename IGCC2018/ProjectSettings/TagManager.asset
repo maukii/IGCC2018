@@ -12,6 +12,7 @@ TagManager:
   - Ghost
   - AI_Points
   - Constant
+  - UI
   layers:
   - Default
   - TransparentFX

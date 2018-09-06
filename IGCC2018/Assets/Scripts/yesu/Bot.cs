@@ -95,22 +95,26 @@ public class Bot : MonoBehaviour
     {
         // Raycasting to player
         NavMeshHit hit;
-        if (_agent.Raycast(_target.position, out hit))
-        {
-            // can't detect player
-            if (_isChasing == true)
-                StartCoroutine("LostPlayer");
 
-            _isChasing = false;
-        }
-        else
+        if(_agent.pathStatus != NavMeshPathStatus.PathInvalid)
         {
-            // detect player
-            if (_isChasing == false)
-                ChangeState(_chaseState);
+            if (_agent.Raycast(_target.position, out hit))
+            {
+                // can't detect player
+                if (_isChasing == true)
+                    StartCoroutine("LostPlayer");
 
-            StopCoroutine("LostPlayer");
-            _isChasing = true;
+                _isChasing = false;
+            }
+            else
+            {
+                // detect player
+                if (_isChasing == false)
+                    ChangeState(_chaseState);
+
+                StopCoroutine("LostPlayer");
+                _isChasing = true;
+            }
         }
     }
 

@@ -30,6 +30,8 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
             s.source.volume = s.volume;
         }
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void OnLevelWasLoaded(int level)

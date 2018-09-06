@@ -8,8 +8,7 @@ public class MainmenuController : MonoBehaviour
 
     public void Play()
     {
-        Debug.Log("Load Level 1");
-        LevelChanger.instance.FadeToLevel(4); // change to right level 1 index
+        LevelChanger.instance.FadeToLevel(1); // change to right level 1 index
     }
 
     public void Quit()

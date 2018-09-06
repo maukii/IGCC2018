@@ -68,12 +68,18 @@ public class TempPlayer : MonoBehaviour
 
     [HideInInspector] public Vector3 tilt;
 
-    public GameObject candyPot;
+    GameObject candyPot;
 
     #endregion
 
+    #region UI stuff
+
     [SerializeField] Sprite[] actionSprites = new Sprite[2];
     [SerializeField] Image activeImage;
+
+    #endregion
+
+
 
     private void OnEnable()
     {
@@ -115,46 +121,38 @@ public class TempPlayer : MonoBehaviour
 
     void Update()
     {
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+
         // actually more responsive if does movement before anything else O.o
-        if(!playerIsDead)
+        if (!playerIsDead)
         {
             DoMovement();
             UpdateUI();
 
-            // This turns the material of objects that are in the way of the camera viewing the player to translucent
-            //hideObjects();
-
-            // Detects for IoT objects within a sphere radius
             detectObjects();
 
-            // Player selects which IoT he wants to hack here
             selectIoT();
 
             // Hack the selected IoT, if possible
             if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (reachableIoT.Count > 0)
             {
+                if (reachableIoT.Count > 0)
+                {
                 /// so many ifs oh god
-                if (gameObject.GetComponent<BatteryCharge>().CanHack(20.0f))
-                    if (reachableIoT[Mathf.FloorToInt(selectedIndex)].GetComponent<IoTBaseObj>().Hack())
-                    {
-                        gameObject.GetComponent<BatteryCharge>().DrainBattery(20.0f);
-                        anim.SetTrigger("Hack");
-                    }
+                    if (gameObject.GetComponent<BatteryCharge>().CanHack(20.0f))
+                        if (reachableIoT[Mathf.FloorToInt(selectedIndex)].GetComponent<IoTBaseObj>().Hack())
+                        {   
+                            gameObject.GetComponent<BatteryCharge>().DrainBattery(20.0f);
+                            anim.SetTrigger("Hack");
+                        }
 
                 //foreach (GameObject obj in reachableIoT)
                 //    obj.GetComponent<IoTBaseObj>().Hack();
+                }
             }
-        }
 
             if (invulnTick > 0.0f)
                 invulnTick -= Time.deltaTime;
-        }
-
-        if (useDebug)
-        {
-            Debug.DrawRay(transform.position + Vector3.up, tilt, Color.green);
         }
     }
 
@@ -162,7 +160,6 @@ public class TempPlayer : MonoBehaviour
     {
         if(closeCandy && candyPot.GetComponent<CandyPot>().remaindingCandy > 0)
         {
-            Debug.Log("cady");
             activeImage.sprite = actionSprites[1];
         }
         else

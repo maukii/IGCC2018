@@ -40,7 +40,7 @@ public class LevelTransition : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene(nextLevel);
+            SceneManager.LoadScene(nextLevel); // change to level changer so get transition
         }
     }
 }
