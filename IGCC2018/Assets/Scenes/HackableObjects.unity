@@ -6317,6 +6317,11 @@ Prefab:
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 64480047544561224, guid: fc5dbe67eda7e2e4c9b8988f90572aa7,
+        type: 2}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc5dbe67eda7e2e4c9b8988f90572aa7, type: 2}
   m_IsPrefabParent: 0
@@ -6696,6 +6701,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fading: 0
   fadeSpeed: 0.05
+--- !u!1 &1972336924 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1080444956981068, guid: fc5dbe67eda7e2e4c9b8988f90572aa7,
+    type: 2}
+  m_PrefabInternal: {fileID: 1972336883}
+--- !u!208 &1972336925
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1972336924}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.2350001, y: 0.555, z: 2.996}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -2.2350001, y: 2.555, z: -2.559}
+  m_TimeToStationary: 0.5
 --- !u!1 &2011746723
 GameObject:
   m_ObjectHideFlags: 0

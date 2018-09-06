@@ -64,6 +64,8 @@ public class CandyPot : MonoBehaviour
                 print(remaindingCandy + " candies are left");
 
                 player.addCandyPoints(1);
+
+                GetComponentInChildren<ParticleSystem>().Play();
             }
         }
         else

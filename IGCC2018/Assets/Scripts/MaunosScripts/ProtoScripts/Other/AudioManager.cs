@@ -34,14 +34,6 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void OnLevelWasLoaded(int level)
-    {
-        if (level == 4)
-            PlaySound("Music");
-        else
-            StopSound("Music");
-    }
-
     public void PlaySound(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);

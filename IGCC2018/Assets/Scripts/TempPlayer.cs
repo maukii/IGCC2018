@@ -111,6 +111,8 @@ public class TempPlayer : MonoBehaviour
 
         Debug.Log(SystemInfo.supportsGyroscope ? "Supports gyroscope" : "No gyroscope support");
         activeImage.sprite = actionSprites[0];
+
+        AudioManager.instance.PlaySound("Music");
     }
 
     private void OnLevelWasLoaded(int level)
@@ -222,6 +224,8 @@ public class TempPlayer : MonoBehaviour
         }
     }
 
+    Vector3 velocity;
+
     private void UpdateAnimator()
     {
         float animSpeed;
@@ -233,8 +237,6 @@ public class TempPlayer : MonoBehaviour
     private void KeyboardMovement()
     {
         tilt = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
-
-        #region Acceleration calculations
         
         if (Mathf.Abs(tilt.magnitude) != 0)
         {
@@ -258,12 +260,11 @@ public class TempPlayer : MonoBehaviour
                 currentSpeed = 0f;
             }
         }
-        #endregion
 
         velocityY += Time.deltaTime * gravity;
-        Vector3 velocity = transform.forward * currentSpeed + Vector3.up * velocityY;
+        velocity = transform.forward * currentSpeed + Vector3.up * velocityY;
         cc.Move(velocity * Time.deltaTime);
-        currentSpeed = new Vector2(cc.velocity.x, cc.velocity.z).magnitude;
+        //currentSpeed = new Vector2(cc.velocity.x, cc.velocity.z).magnitude;
 
         if (cc.isGrounded)
         {
@@ -594,4 +595,17 @@ public class TempPlayer : MonoBehaviour
 
         playerIsDead = false;
     }
+
+    void OnGUI()
+    {
+        if(useDebug)
+        {
+            GUI.Label(new Rect(500, 300, 200, 40), "Gyro rotation rate " + gyro.rotationRate);
+            GUI.Label(new Rect(500, 350, 200, 40), "Gyro attitude" + gyro.attitude);
+            GUI.Label(new Rect(500, 400, 200, 40), "Gyro enabled : " + gyro.enabled);
+            GUI.Label(new Rect(500, 450, 200, 40), "Tilt : " + tilt);
+            GUI.Label(new Rect(500, 500, 200, 40), "Velocity : " + velocity);
+        }
+    }
+
 }

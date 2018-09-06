@@ -30,6 +30,8 @@ public class EnemyKillPlayer : MonoBehaviour
                 target.GetComponent<TempPlayer>().Die();
             }
         }
+
+        Debug.Log(Vector3.Distance(transform.position, target.transform.position));
     }
 
     public void Respawn()
